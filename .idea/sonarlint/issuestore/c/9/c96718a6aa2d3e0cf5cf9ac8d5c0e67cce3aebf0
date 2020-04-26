@@ -1,0 +1,10 @@
+
+bsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‰¸»
+nsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(–à‡øÿÿÿÿ8Žœœ³„-
+usquid:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+ssquid:S00116
+"VRename this field "_parameters" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ÎØóûÿÿÿÿ
+Ksquid:S1068
+"/Remove this unused "_parameters" private field.(¹ÎØóûÿÿÿÿ
+Isquid:S11352"2Complete the task associated to this TODO comment.(‡ñÅ¼
+ksquid:S00100,"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áøðüüÿÿÿÿ

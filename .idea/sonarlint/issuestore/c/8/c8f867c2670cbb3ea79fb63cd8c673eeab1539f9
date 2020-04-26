@@ -1,0 +1,8 @@
+
+ysquid:S00115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ğ¾’Å8åòÉ‹-
+Asquid:S2440"%Remove this instantiation of "Magic".(ÿÃù¨ÿÿÿÿÿ
+Asquid:S2440"%Remove this instantiation of "Magic".(ÿÃù¨ÿÿÿÿÿ
+Gsquid:S1481"+Remove this unused "parser" local variable.(ÿÃù¨ÿÿÿÿÿ
+Vsquid:S1854":Remove this useless assignment to local variable "parser".(ÿÃù¨ÿÿÿÿÿ
+Vsquid:S1854":Remove this useless assignment to local variable "parser".(ÿÃù¨ÿÿÿÿÿ
+Gsquid:S1481"+Remove this unused "parser" local variable.(ÿÃù¨ÿÿÿÿÿ

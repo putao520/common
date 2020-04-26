@@ -1,0 +1,6 @@
+
+Qsquid:S1118
+":Add a private constructor to hide the implicit public one.(ˆŠŞà
+asquid:S2674="JCheck the return value of the "read" call to see how many bytes were read.(•¦Š§
+Nsquid:S11354"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+jsquid:S2095 "NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(•¸†ûÿÿÿÿ

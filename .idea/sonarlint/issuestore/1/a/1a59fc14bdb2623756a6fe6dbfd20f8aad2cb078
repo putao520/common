@@ -1,0 +1,28 @@
+
+dsquid:S00112¥"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+msquid:S2095L"QUse try-with-resources or close this "CheckedOutputStream" in a "finally" clause.(ĞÁ‘äşÿÿÿÿ
+\squid:S2095"EUse try-with-resources or close this "ZipFile" in a "finally" clause.(Êˆì›
+fsquid:S3027"JPut single-quotes around '.' to use the faster "lastIndexOf(char)" method.(²á‡Ôıÿÿÿÿ
+O
+squid:S106]"9Replace this use of System.out or System.err by a logger.(Ñªôğ
+T
+squid:S106$"9Replace this use of System.out or System.err by a logger.(½ºåşøÿÿÿÿ
+esquid:S00112H"FDefine and throw a dedicated exception instead of using a generic one.(ˆáßş8ö©­„-
+W
+squid:S899t"BDo something with the "boolean" value returned by "createNewFile".(¦íÀ
+]squid:HiddenFieldCheck";Rename "zipFile" which hides the field declared at line 14.(Êˆì›
+dsquid:S2095:"MUse try-with-resources or close this "ZipOutputStream" in a "finally" clause.(¥­ÎË
+isquid:S2095w"RUse try-with-resources or close this "BufferedOutputStream" in a "finally" clause.(›¾êá
+fsquid:S3027q"JPut single-quotes around '/' to use the faster "lastIndexOf(char)" method.(üÖêøÿÿÿÿ
+jsquid:S20957"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ÌÕöøÿÿÿÿ
+nsquid:S2095™"QUse try-with-resources or close this "BufferedInputStream" in a "finally" clause.(ÁùÙ×ıÿÿÿÿ
+csquid:S00112A"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+jsquid:S2095K"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ÌÕöøÿÿÿÿ
+T
+squid:S106!"9Replace this use of System.out or System.err by a logger.(½ºåşøÿÿÿÿ
+fsquid:S3027p"JPut single-quotes around '/' to use the faster "lastIndexOf(char)" method.(äŠÌ…úÿÿÿÿ
+csquid:CommentedOutCodeLine«"<This block of commented-out lines of code should be removed.(Çµí‘
+csquid:S00112S"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+O
+squid:S106Z"9Replace this use of System.out or System.err by a logger.(Ñªôğ
+msquid:S20958"QUse try-with-resources or close this "CheckedOutputStream" in a "finally" clause.(ĞÁ‘äşÿÿÿÿ

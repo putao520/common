@@ -1,0 +1,8 @@
+
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¡£Şøÿÿÿÿ
+nsquid:S3776R"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(äÊüÌøÿÿÿÿ
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¢Í•Õıÿÿÿÿ
+=squid:S1659b"!Declare "len" on a separate line.(Åƒ¥üÿÿÿÿ
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(ıŠù³øÿÿÿÿ
+usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¢Í•Õıÿÿÿÿ
+qsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ıŠù³øÿÿÿÿ8ãÒ¬„-

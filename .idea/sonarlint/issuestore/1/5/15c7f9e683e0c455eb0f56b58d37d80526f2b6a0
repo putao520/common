@@ -1,0 +1,37 @@
+
+qsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(’¨…8ΑλΫ‹-
+vsquid:ModifiersOrderCheck/"EReorder the modifiers to comply with the Java Language Specification.(ή„¬Άόÿÿÿÿ8ΑλΫ‹-
+Isquid:S00108Ή")Either remove or fill this block of code.(”ύΎ8ΑλΫ‹-
+:squid:S1643Q"Use a StringBuilder instead.(εΒϋΩ8ΑλΫ‹-
+vsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(Θ½„ύÿÿÿÿ8ΑλΫ‹-
+hsquid:S4042γ"IUse "java.nio.Files#delete" here for better messages on error conditions.(§π’ÿ8ΑλΫ‹-
+Fsquid:S1148<"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8ΑλΫ‹-
+Y
+squid:S899ς";Do something with the "boolean" value returned by "delete".(§π’ÿ8ΑλΫ‹-
+rsquid:ModifiersOrderCheck "EReorder the modifiers to comply with the Java Language Specification.(·ρτ8ΑλΫ‹-
+vsquid:ModifiersOrderCheckX"EReorder the modifiers to comply with the Java Language Specification.(Πÿψϊÿÿÿÿ8ΑλΫ‹-
+Usquid:S1135&"2Complete the task associated to this TODO comment.(ΥΜ®ώÿÿÿÿ8ΑλΫ‹-
+vsquid:ModifiersOrderCheckG"EReorder the modifiers to comply with the Java Language Specification.(―ζ™μωÿÿÿÿ8ΑλΫ‹-
+Rsquid:S1066i"/Merge this if statement with the enclosing one.(ΰΫΚΡώÿÿÿÿ8ΑλΫ‹-
+Usquid:S1135;"2Complete the task associated to this TODO comment.(ΥΜ®ώÿÿÿÿ8ΑλΫ‹-
+Msquid:S1172‰".Remove this unused method parameter "newFile".(ΟΡ‰ρ8ΑλΫ‹-
+vsquid:ModifiersOrderCheck5"EReorder the modifiers to comply with the Java Language Specification.(Ώƒ¤Μÿÿÿÿÿ8ΑλΫ‹-
+wsquid:ModifiersOrderCheckΎ"EReorder the modifiers to comply with the Java Language Specification.(‚τΤÿÿÿÿÿ8ΑλΫ‹-
+qsquid:ModifiersOrderCheckΟ"EReorder the modifiers to comply with the Java Language Specification.(”Ψ©!8ΑλΫ‹-
+qsquid:ModifiersOrderCheck_"EReorder the modifiers to comply with the Java Language Specification.(Ο’ύ΄8ΑλΫ‹-
+Isquid:S1075O"&Remove this hard-coded path-delimiter.(ÿ¶ΡΩÿÿÿÿÿ8ΑλΫ‹-
+qsquid:ModifiersOrderCheck "EReorder the modifiers to comply with the Java Language Specification.(µΟΒμ8ΑλΫ‹-
+hsquid:S4042ς"IUse "java.nio.Files#delete" here for better messages on error conditions.(§π’ÿ8ΑλΫ‹-
+^
+squid:S899Η";Do something with the "boolean" value returned by "delete".(ι‘‚©ϊÿÿÿÿ8ΑλΫ‹-
+rsquid:ModifiersOrderCheckλ"EReorder the modifiers to comply with the Java Language Specification.(σƒο8ΑλΫ‹-
+rsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(πξ8ΑλΫ‹-
+msquid:S4042Η"IUse "java.nio.Files#delete" here for better messages on error conditions.(ι‘‚©ϊÿÿÿÿ8ΑλΫ‹-
+rsquid:ModifiersOrderCheckΧ"EReorder the modifiers to comply with the Java Language Specification.(Ϊ¦ÿΖ8ΑλΫ‹-
+Y
+squid:S899γ";Do something with the "boolean" value returned by "delete".(§π’ÿ8ΑλΫ‹-
+rsquid:ModifiersOrderCheck³"EReorder the modifiers to comply with the Java Language Specification.(π’Δ‘8ΑλΫ‹-
+vsquid:ModifiersOrderCheck{"EReorder the modifiers to comply with the Java Language Specification.(φλΤθϊÿÿÿÿ8ΑλΫ‹-
+rsquid:ModifiersOrderCheck‰"EReorder the modifiers to comply with the Java Language Specification.(ΟΡ‰ρ8ΑλΫ‹-
+wsquid:ModifiersOrderCheck£"EReorder the modifiers to comply with the Java Language Specification.(ζβ ΄όÿÿÿÿ8ΑλΫ‹-
+Xsquid:S1118":Add a private constructor to hide the implicit public one.(Μ’ζϊ8ΑλΫ‹-

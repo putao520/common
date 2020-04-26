@@ -1,0 +1,19 @@
+
+Ksquid:S28646"4Iterate over the "entrySet" instead of the "keySet".(ß¿î˜
+jsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¦ÀçÖ
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(Ñõßçüÿÿÿÿ
+jsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¶×Ã
+jsquid:ModifiersOrderCheck("EReorder the modifiers to comply with the Java Language Specification.(¼ÉµÃ
+jsquid:ModifiersOrderCheck/"EReorder the modifiers to comply with the Java Language Specification.(ğË¸ô
+osquid:ModifiersOrderCheck2"EReorder the modifiers to comply with the Java Language Specification.(°Ç†èıÿÿÿÿ
+osquid:ModifiersOrderCheck>"EReorder the modifiers to comply with the Java Language Specification.(È¥–Äøÿÿÿÿ
+osquid:ModifiersOrderCheckW"EReorder the modifiers to comply with the Java Language Specification.(Ş›‘øÿÿÿÿ
+jsquid:ModifiersOrderChecko"EReorder the modifiers to comply with the Java Language Specification.(¥ù¿¥
+jsquid:ModifiersOrderCheckt"EReorder the modifiers to comply with the Java Language Specification.(´µş
+osquid:ModifiersOrderChecky"EReorder the modifiers to comply with the Java Language Specification.(ƒ±êÖüÿÿÿÿ
+ksquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ò®Õ†
+ksquid:ModifiersOrderCheck„"EReorder the modifiers to comply with the Java Language Specification.(Ïò´˜
+ksquid:ModifiersOrderCheckˆ"EReorder the modifiers to comply with the Java Language Specification.(µµñò
+bsquid:CommentedOutCodeLinea"<This block of commented-out lines of code should be removed.(Ú˜÷ñ
+Qsquid:S1118":Add a private constructor to hide the implicit public one.(Û ƒœ
+hsquid:S00117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒµI

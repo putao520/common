@@ -1,0 +1,26 @@
+
+vsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ÿµ•ùÿÿÿÿ8îÛ’–„-
+Dsquid:S2129‘" Remove this "Double" constructor(½§®àûÿÿÿÿ8éÂï–„-
+qsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(‡ˆ‹8Æ£š—„-
+Vsquid:S1135É"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8éÂï–„-
+squid:S4144ç"bUpdate this method so that its implementation is not identical to "removeLeadingFrom" on line 152.(¸ï¢ô8©î÷—„-
+vsquid:S00117©"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õéùÿÿÿÿ8Ã†ß‹-
+Hsquid:S1172w"*Remove this unused method parameter "str".(š€Ü8éÂï–„-
+qsquid:ModifiersOrderCheckQ"EReorder the modifiers to comply with the Java Language Specification.(µ×à8éÂï–„-
+qsquid:S00117•"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åğèı8éÂï–„-
+hsquid:S3358¢"DExtract this nested ternary operation into an independent statement.(¸³Òìùÿÿÿÿ8å“ñ—„-
+hsquid:S3358³"DExtract this nested ternary operation into an independent statement.(ÁÔÏÍûÿÿÿÿ8éÂï–„-
+Xsquid:S2864¬"4Iterate over the "entrySet" instead of the "keySet".(ÙèØ‡ûÿÿÿÿ8éÂï–„-
+@squid:S1643‘"Use a StringBuilder instead.(½§®àûÿÿÿÿ8éÂï–„-
+bsquid:S2583e"DChange this condition so that it does not always evaluate to "false"(İÛ¦¹8éÂï–„-
+}squid:S1488x"ZImmediately return this expression instead of assigning it to the temporary variable "rb".(‚ š¾ùÿÿÿÿ8éÂï–„-
+?squid:S1643I"Use a StringBuilder instead.(¬™‰£ÿÿÿÿÿ8Ã†ß‹-
+Csquid:S1659Ş"Declare "l" on a separate line.(ë†Ûàıÿÿÿÿ8Ã†ß‹-
+}squid:S1149S"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰8éÂï–„-
+wsquid:ModifiersOrderCheck“"EReorder the modifiers to comply with the Java Language Specification.(ĞÕ’óüÿÿÿÿ8çï¤—„-
+vsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(³ä—Şûÿÿÿÿ8í¥÷–„-
+vsquid:S00117“"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ĞÕ’óüÿÿÿÿ8éÂï–„-
+vsquid:S00117–"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ıª¯úÿÿÿÿ8éÂï–„-
+wsquid:ModifiersOrderCheck©"EReorder the modifiers to comply with the Java Language Specification.(õéùÿÿÿÿ8Ã†ß‹-
+Bsquid:S2153‘"Remove the boxing to "Double".(½§®àûÿÿÿÿ8éÂï–„-
+isquid:CommentedOutCodeLinez"<This block of commented-out lines of code should be removed.(Ùò‚â8éÂï–„-

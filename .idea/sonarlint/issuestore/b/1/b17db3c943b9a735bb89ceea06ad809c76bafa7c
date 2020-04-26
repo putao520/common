@@ -1,0 +1,14 @@
+
+Hsquid:S00108")Either remove or fill this block of code.(ÚğüÉ8ûÊ—„-
+usquid:S00117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä½»•úÿÿÿÿ8Ïğ‰—„-
+psquid:S001174"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñıĞ£8Ïğ‰—„-
+]squid:S1118
+":Add a private constructor to hide the implicit public one.(¢ªèùÿÿÿÿ8Ïğ‰—„-
+usquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÕÙºşÿÿÿÿ8Ïğ‰—„-
+psquid:S00117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿¥³Ø8Ïğ‰—„-
+usquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›Î£ªüÿÿÿÿ8Ïğ‰—„-
+Msquid:S001080")Either remove or fill this block of code.(ĞĞ¹óúÿÿÿÿ8Ïğ‰—„-
+isquid:S1192"FDefine a constant instead of duplicating this literal "UTF-8" 4 times.(ËíŠ¸üÿÿÿÿ8Ïğ‰—„-
+]squid:UselessImportCheck"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8§¥•—„-
+[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8§¥•—„-
+hsquid:UselessImportCheck"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8§¥•—„-

@@ -1,0 +1,6 @@
+
+nsquid:S00117G"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºÅïÂþÿÿÿÿ
+esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ž›èš
+Ksquid:S2864="4Iterate over the "entrySet" instead of the "keySet".(“â»í
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Û°¬þÿÿÿÿÿ
+bsquid:CommentedOutCodeLineP"<This block of commented-out lines of code should be removed.(¯œ«Æ

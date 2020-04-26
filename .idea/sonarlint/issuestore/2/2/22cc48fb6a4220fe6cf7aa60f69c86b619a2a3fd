@@ -1,0 +1,4 @@
+
+~"squid:ClassVariableVisibilityCheck"PMake func a static final constant or non-public and provide accessors if needed.(Ÿ¾£¶
+‚"squid:ClassVariableVisibilityCheck"TMake safeCode a static final constant or non-public and provide accessors if needed.( ×¶¹
+qsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Þ†’`

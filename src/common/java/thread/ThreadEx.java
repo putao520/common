@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ThreadEx extends Thread {
 	private List<Object> _parameters;
-	//private Object _paramter;
 	{
 		_parameters = new ArrayList<>();
 	}

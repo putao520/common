@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
-        <module name="common" />
         <module name="gfw-core" />
+        <module name="common" />
         <module name="gfw-common" />
       </profile>
     </annotationProcessing>

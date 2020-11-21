@@ -1,6 +1,5 @@
 package common.java.thread;
 
-import co.paralleluniverse.fibers.Fiber;
 import common.java.nlogger.nlogger;
 
 import java.util.ArrayList;
@@ -43,13 +42,7 @@ public class ThreadEx extends Thread {
 
 	public static final void SleepEx(long millisSecond) {
 		try {
-			// Thread thread = Thread.currentThread();
-			if( !Fiber.isCurrentFiber() ){
-				Thread.sleep(millisSecond);
-			}
-			else {
-				Fiber.sleep(millisSecond);
-			}
+			Thread.sleep(millisSecond);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

@@ -1,17 +1,14 @@
 package common.java.time;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class TimeHelper {
-    private ZoneId timeZone;
+    private final ZoneId timeZone;
     public static final TimeHelper build(ZoneId timeZone){
         return new TimeHelper(timeZone);
     }
@@ -116,25 +113,33 @@ public class TimeHelper {
     public int nowDay(){
         return LocalDate.now(this.timeZone).getDayOfMonth();
     }
-    public int nowYear(){
+
+    public int nowYear() {
         return LocalDate.now(this.timeZone).getYear();
     }
-    public int nowMonth(){
+
+    public int nowMonth() {
         return LocalDate.now(this.timeZone).getMonthValue();
     }
-    public int nowWeek(){
+
+    public int nowWeek() {
         return LocalDate.now(this.timeZone).getDayOfWeek().getValue();
     }
 
+    public int nowHour() {
+        return LocalDateTime.now(this.timeZone).getHour();
+    }
+
     /**
-    获得零时区当前时间戳
-    * */
-	public static long getNowTimestampByZero(){
-		return Instant.now().toEpochMilli();
-	}
+     * 获得零时区当前时间戳
+     */
+    public static long getNowTimestampByZero() {
+        return Instant.now().toEpochMilli();
+    }
+
     /**
-     获得当前时区时间戳
-     * */
+     * 获得当前时区时间戳
+     */
     public static long getNowTimestampByZero(ZoneId timeZone){
         return Instant.now().atZone(timeZone).toInstant().toEpochMilli();
     }

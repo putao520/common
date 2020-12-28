@@ -1,13 +1,15 @@
 package common.java.number;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class NumberHelper {
 	public static final long number2long(Object in) {
 		long r = 0;
-		try{
-			if( in instanceof Long ){
+		try {
+			if (in instanceof Long) {
 				r = ((Long) in).longValue();
-			}
-			else if( in instanceof Integer ){
+			} else if (in instanceof Integer) {
 				r = ((Integer) in).longValue();
 			}
 			else if( in instanceof String ){
@@ -19,10 +21,13 @@ public class NumberHelper {
 			else if( in instanceof Float ){
 				r = ((Float) in).longValue();
 			}
-			else if( in instanceof Boolean ){
-				r = ((Boolean)in).booleanValue() ? 0 : 1;
-			}
-			else {
+			else if (in instanceof Boolean) {
+				r = ((Boolean) in).booleanValue() ? 0 : 1;
+			} else if (in instanceof BigInteger) {
+				r = ((BigInteger) in).longValue();
+			} else if (in instanceof BigDecimal) {
+				r = ((BigDecimal) in).longValue();
+			} else {
 				r = 1;
 			}
 		}
@@ -47,6 +52,10 @@ public class NumberHelper {
 				r = ((Float) in).intValue();
 			} else if (in instanceof Boolean) {
 				r = ((Boolean) in).booleanValue() ? 0 : 1;
+			} else if (in instanceof BigInteger) {
+				r = ((BigInteger) in).intValue();
+			} else if (in instanceof BigDecimal) {
+				r = ((BigDecimal) in).intValue();
 			} else {
 				r = 1;
 			}

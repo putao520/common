@@ -1,13 +1,15 @@
 package common.java.string;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -423,23 +425,31 @@ public class StringHelper {
 	 * @param data	K-V对应替换的数据组
 	 * @return
 	 */
-	public static final String createCodeText(String text,JSONObject data){
+	public static final String createCodeText(String text, JSONObject data) {
 		String rs = text;
-		for(Object obj : data.keySet()){
+		for (Object obj : data.keySet()) {
 			rs = rs.replaceAll("@" + obj.toString(), data.get(obj).toString());
 		}
 		return rs;
 	}
 
-	public static final boolean invaildString(String str){
+	public static final String fixString(String str, int len) {
+		return fixString(str, len, "0");
+	}
+
+	public static final String fixString(String str, int len, String replace_char) {
+		return String.format(len + "d", str).replace(" ", replace_char);
+	}
+
+	public static final boolean invaildString(String str) {
 		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
 	}
+
 	public static final String any2String(Object obj) {
 		String out;
-		try{
+		try {
 			out = obj.toString();
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			try{
 				out = String.valueOf(obj);
 			}

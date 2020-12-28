@@ -13,19 +13,21 @@ import javax.xml.rpc.ServiceException;
 import java.rmi.RemoteException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class soapWS {  
-	private String wsdlUrl;
-	private Service service;
-	private static ConcurrentHashMap<String,Call> callCache;
+public class soapWS {
+	private static final ConcurrentHashMap<String, Call> callCache;
+	private final String wsdlUrl;
+	private final Service service;
+
 	static {
 		callCache = new ConcurrentHashMap<>();
 	}
-	public soapWS(String wsdlURL){
-		wsdlUrl = wsdlURL; 
+
+	public soapWS(String wsdlURL) {
+		wsdlUrl = wsdlURL;
 		service = new Service();
 	}
-	
-	private QName getType(Object value){
+
+	private QName getType(Object value) {
 		//String fix = "xsi:";
 		QName rQName = null;
 		if( value instanceof Integer ){
@@ -51,24 +53,44 @@ public class soapWS {
 		}
 		return rQName;
 	}
+
 	public soapWS addCall(String fName,JSONArray params) throws ServiceException{
 		Call call = (Call) service.createCall();
 		call.setTargetEndpointAddress(wsdlUrl);
 		call.setOperationName(fName);
 		JSONObject json;
-        for(Object obj : params){
-        	json = (JSONObject)obj;
-        	for(Object key : json.keySet()) {
-        		call.addParameter( (String)key , getType( json.get(key) ), ParameterMode.IN);
-        	}
-        }
-        call.setReturnType(XMLType.XSD_STRING);  
-        callCache.put(fName, call);
-        return this;
+		for (Object obj : params) {
+			json = (JSONObject) obj;
+			for (Object key : json.keySet()) {
+				call.addParameter((String) key, getType(json.get(key)), ParameterMode.IN);
+			}
+		}
+		// call.setReturnType(XMLType.XSD_STRING);
+		callCache.put(fName, call);
+		return this;
 	}
-	public Object call(String fName,Object[] params) {
+
+	public soapWS addCall(String fName, JSONObject json) throws ServiceException {
+		Call call = (Call) service.createCall();
+		call.setTargetEndpointAddress(wsdlUrl);
+		call.setOperationName(fName);
+		for (Object key : json.keySet()) {
+			QName qn = (QName) json.get(key);
+			call.addParameter((String) key, qn, ParameterMode.IN);
+		}
+		// call.setReturnType(XMLType.XSD_STRING);
+		call.setTimeout(30 * 1000);
+		callCache.put(fName, call);
+		return this;
+	}
+
+	public Call getCall(String fName) {
+		return callCache.get(fName);
+	}
+
+	public Object call(String fName, Object[] params) {
 		Object ro = null;
-		Call _call =  callCache.get(fName);
+		Call _call = callCache.get(fName);
 		try {
 			ro = _call.invoke(params);
 		} catch (RemoteException e) {

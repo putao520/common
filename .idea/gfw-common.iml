@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4" />
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="WebServicesClient" name="WebServices 客户端">
+      <configuration ws.engine="Apache Axis 2" />
+    </facet>
+  </component>
+</module>

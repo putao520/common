@@ -3,6 +3,7 @@ package common.java.image;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
@@ -25,6 +26,16 @@ public class VerifyCode {
     public static void output(BufferedImage image, OutputStream out)
             throws IOException {
         ImageIO.write(image, "JPEG", out);
+    }
+
+    public static byte[] output(BufferedImage image) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "JPEG", out);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return out.toByteArray();
     }
 
     // 生成随机的颜色

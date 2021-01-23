@@ -461,13 +461,30 @@ public class StringHelper {
 	}
 	public StringHelper toUTF8(String charSetName) {
 		String rString = null;
-        try {
+		try {
 			rString = new String(str.getBytes(charSetName), StandardCharsets.UTF_8);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			rString = "";
 		}
-        str = rString;
-        return this;
+		str = rString;
+		return this;
+	}
+
+	/**
+	 * 不够位数的在前面补0，保留num的长度位数字
+	 *
+	 * @param num
+	 * @return
+	 */
+	public String autoGenericCode(int num) {
+		String result = "";
+		// 保留num的位数
+		// 0 代表前面补充0
+		// num 代表长度为4
+		// d 代表参数为正数型
+		result = String.format("%0" + num + "d", Integer.parseInt(str) + 1);
+
+		return result;
 	}
 }

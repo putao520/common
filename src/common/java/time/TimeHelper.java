@@ -1,11 +1,17 @@
 package common.java.time;
 
+import common.java.string.StringHelper;
+
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class TimeHelper {
     private final ZoneId timeZone;
@@ -140,7 +146,64 @@ public class TimeHelper {
     /**
      * 获得当前时区时间戳
      */
-    public static long getNowTimestampByZero(ZoneId timeZone){
+    public static long getNowTimestampByZero(ZoneId timeZone) {
         return Instant.now().atZone(timeZone).toInstant().toEpochMilli();
+    }
+
+    //根据年月 获取月份天数
+    public static final int getMonthDayNum(String dyear, String dmouth) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM");
+        Calendar rightNow = Calendar.getInstance();
+        try {
+            rightNow.setTime(simpleDate.parse(dyear + "/" + dmouth));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return rightNow.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+
+    //根据开始年月，到结束年月范围，生成KEY ARRAY;
+    public static final List<String> buildMonthArray(long startYear, long startMonth, long endYear, long endMonth) {
+        List<String> monthArray = new ArrayList<>();
+        long year_num = endYear - startYear;
+        if (year_num >= 0) {
+            // 同一年月份处理
+            if (year_num == 0) {
+                for (long i = startMonth; i <= endMonth; i++) {
+                    monthArray.add(startYear + "/" + i);
+                }
+            }
+            // 非同一年
+            else {
+                // 开始年
+                for (long i = startMonth; i <= 12; i++) {
+                    monthArray.add(startYear + "/" + i);
+                }
+                // 中间全年
+                for (long y = (startYear + 1); y < endYear; y++) {
+                    for (long m = 1; m <= 12; m++) {
+                        monthArray.add(y + "/" + m);
+                    }
+                }
+                // 结束年
+                for (long i = 1; i <= endMonth; i++) {
+                    monthArray.add(endYear + "/" + i);
+                }
+            }
+        }
+        return monthArray;
+    }
+
+    // 根据给定的年月日生成开始结束时间戳
+    public UnixTimeRanger GetUnixTimeRanger(String year, String month, String day) {
+        UnixTimeRanger r = new UnixTimeRanger();
+        r.start = dateTimeToTimestamp(
+                StringHelper.build(year).autoGenericCode(4) + "-" + StringHelper.build(month).autoGenericCode(2) + "-" + StringHelper.build(day).autoGenericCode(2) + " 00:00:00"
+        );
+        r.end = dateTimeToTimestamp(
+                StringHelper.build(year).autoGenericCode(4) + "-" + StringHelper.build(month).autoGenericCode(2) + "-" + StringHelper.build(day).autoGenericCode(2) + " 23:59:59"
+        );
+        return r;
     }
 }

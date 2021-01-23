@@ -15,7 +15,7 @@ public class NumberHelper {
 			} else if (in instanceof Integer) {
 				r = ((Integer) in).longValue();
 			} else if (in instanceof String) {
-				r = (new Integer(((String) in).trim())).longValue();
+				r = Long.valueOf(((String) in).trim()).longValue();
 			} else if (in instanceof Double) {
 				r = ((Double) in).longValue();
 			}
@@ -49,7 +49,7 @@ public class NumberHelper {
 			} else if (in instanceof Integer) {
 				r = ((Integer) in).intValue();
 			} else if (in instanceof String) {
-				r = (new Integer(((String) in).trim())).intValue();
+				r = Integer.valueOf(((String) in).trim()).intValue();
 			} else if (in instanceof Double) {
 				r = ((Double) in).intValue();
 			} else if (in instanceof Float) {

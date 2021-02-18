@@ -6,7 +6,7 @@
 
     <groupId>gfw</groupId>
     <artifactId>common</artifactId>
-    <version>1.072</version>
+    <version>1.080</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

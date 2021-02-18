@@ -17,12 +17,6 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.8</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.axis2/axis2-kernel -->
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-kernel</artifactId>
-            <version>1.7.6</version>
-        </dependency>
         <dependency>
             <groupId>axis</groupId>
             <artifactId>axis</artifactId>

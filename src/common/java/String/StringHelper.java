@@ -120,7 +120,6 @@ public class StringHelper {
 	 */
 	private static boolean isexp(String str){
 		boolean rb = false;
-		/*
 		String[] vsStrings;
 		String[] sl = {"\\+","-","\\*","%","\\/","\\\\"};
 		try{
@@ -144,7 +143,7 @@ public class StringHelper {
 		catch(Exception e){
 			rb = false;
 		}
-		*/
+
 		return rb;
 	}
 	/**删除字符串第1个字符
@@ -207,42 +206,39 @@ public class StringHelper {
 		return this;
 	}
 
-	public StringHelper left(int len){
-		str = ( str.length() > len ) ? str.substring(0, len) : str;
+	public StringHelper left(int len) {
+		str = (str.length() > len) ? str.substring(0, len) : str;
 		return this;
 	}
 //CharMatcher.anyOf("jadk").trimFrom(sequence);trimLeading;trimTrailingFrom
-	/**从左  开始 修复字符串
-	 * @param ichar
-	 * @return
-	 */
-	public StringHelper trimLeadingFrom(char ichar) {
-		leftFix(ichar);
-		return this;
+
+	public static final String fix(String str, int len) {
+		return fix(str, len, "0");
 	}
-	private void leftFix(char ichar){
+
+	private void leftFix(char ichar) {
 		int i = 0, l = str.length();
-		for( ; i < l; i++ ){
-			if( str.charAt(i) != ichar ){
+		for (; i < l; i++) {
+			if (str.charAt(i) != ichar) {
 				break;
 			}
 		}
 		str = str.substring(i);
 	}
-	/**从右  开始 修复字符串
-	 * @param ichar
-	 * @return
+
+	/**
+	 * 向前补特定字符串方式对其字符串
 	 */
-	public StringHelper trimTrailingFrom(char ichar) {
-		rightFix(ichar);
-		return this;
+	public static final String fix(String str, int len, String replace_char) {
+		return String.format(len + "d", str).replace(" ", replace_char);
 	}
-	private void rightFix(char ichar){
+
+	private void rightFix(char ichar) {
 		int l = str.length();
-		if( l > 0 ){
+		if (l > 0) {
 			int i = 0;
-			for(; i < l; l-- ){
-				if( str.charAt(l - 1) != ichar ){
+			for (; i < l; l--) {
+				if (str.charAt(l - 1) != ichar) {
 					break;
 				}
 			}
@@ -313,13 +309,8 @@ public class StringHelper {
 		}
 		return formline;
     }
-	public String[] toArray(char ichar){
-		return toArray(String.valueOf(ichar));
-	}
-	public String[] toArray(String ichar){
-		return str.split(ichar);
-	}
-    @Override
+
+	@Override
     public String toString(){
     	return str;
 	}
@@ -433,32 +424,46 @@ public class StringHelper {
 		return rs;
 	}
 
-	public static final String fixString(String str, int len) {
-		return fixString(str, len, "0");
-	}
-
-	public static final String fixString(String str, int len, String replace_char) {
-		return String.format(len + "d", str).replace(" ", replace_char);
-	}
-
-	public static final boolean invaildString(String str) {
+	public static final boolean invaild(String str) {
 		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
 	}
 
-	public static final String any2String(Object obj) {
+	public static final String toString(Object obj) {
 		String out;
 		try {
 			out = obj.toString();
 		} catch (Exception e) {
-			try{
+			try {
 				out = String.valueOf(obj);
-			}
-			catch (Exception e1){
+			} catch (Exception e1) {
 				out = null;
 			}
 		}
 		return out;
 	}
+
+	/**
+	 * 从左  开始 替换ichar对应字符
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimLeadingFrom(char ichar) {
+		leftFix(ichar);
+		return this;
+	}
+
+	/**
+	 * 从右  开始 替换ichar对应字符
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimTrailingFrom(char ichar) {
+		rightFix(ichar);
+		return this;
+	}
+
 	public StringHelper toUTF8(String charSetName) {
 		String rString = null;
 		try {

@@ -13,7 +13,7 @@ import javax.xml.rpc.ServiceException;
 import java.rmi.RemoteException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class soapWS {
+public class AxisWebService {
 	private static final ConcurrentHashMap<String, Call> callCache;
 	private final String wsdlUrl;
 	private final Service service;
@@ -22,7 +22,7 @@ public class soapWS {
 		callCache = new ConcurrentHashMap<>();
 	}
 
-	public soapWS(String wsdlURL) {
+	public AxisWebService(String wsdlURL) {
 		wsdlUrl = wsdlURL;
 		service = new Service();
 	}
@@ -30,7 +30,7 @@ public class soapWS {
 	private QName getType(Object value) {
 		//String fix = "xsi:";
 		QName rQName = null;
-		if( value instanceof Integer ){
+		if (value instanceof Integer) {
 			rQName = XMLType.XSD_INTEGER;
 		}
 		else if( value instanceof Long ){
@@ -44,17 +44,15 @@ public class soapWS {
 		}
 		else if( value instanceof Float ){
 			rQName = XMLType.XSD_FLOAT;
-		}
-		else if( value instanceof QName) {
-			rQName = (QName)value;
-		}
-		else {
+		} else if (value instanceof QName) {
+			rQName = (QName) value;
+		} else {
 			rQName = XMLType.XSD_STRING;
 		}
 		return rQName;
 	}
 
-	public soapWS addCall(String fName,JSONArray params) throws ServiceException{
+	public AxisWebService addCall(String fName, JSONArray params) throws ServiceException {
 		Call call = (Call) service.createCall();
 		call.setTargetEndpointAddress(wsdlUrl);
 		call.setOperationName(fName);
@@ -70,7 +68,7 @@ public class soapWS {
 		return this;
 	}
 
-	public soapWS addCall(String fName, JSONObject json) throws ServiceException {
+	public AxisWebService addCall(String fName, JSONObject json) throws ServiceException {
 		Call call = (Call) service.createCall();
 		call.setTargetEndpointAddress(wsdlUrl);
 		call.setOperationName(fName);

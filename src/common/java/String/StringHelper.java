@@ -105,25 +105,53 @@ public class StringHelper {
 				rString = "'" + r2 + "'";
             } else if (obj instanceof JSONArray) {
 				rString = "\"" + r2 + "\"";
-			} else{
+			} else {
 				rString = r2;
 			}
-		}
-		else{
+		} else {
 			rString = "null";
 		}
 		return rString;
 	}
-	/**是否是sql表达式字符串
+
+	/**
+	 * 根据传入变量类型生成对应的字符串表达式
+	 *
+	 * @param obj
+	 * @return
+	 */
+	public static String typeString(Object obj, String replace_char) {
+		String rString;
+		String r2;
+		if (obj != null) {
+			r2 = obj.toString();
+			if (obj instanceof String) {
+				rString = (isexp(r2) ? r2 : replace_char + obj + replace_char);
+			} else if (obj instanceof JSONObject) {
+				rString = replace_char + r2 + replace_char;
+			} else if (obj instanceof JSONArray) {
+				rString = replace_char + r2 + replace_char;
+			} else {
+				rString = r2;
+			}
+		} else {
+			rString = "null";
+		}
+		return rString;
+	}
+
+	/**
+	 * 是否是sql表达式字符串
+	 *
 	 * @param str
 	 * @return
 	 */
-	private static boolean isexp(String str){
+	private static boolean isexp(String str) {
 		boolean rb = false;
 		String[] vsStrings;
-		String[] sl = {"\\+","-","\\*","%","\\/","\\\\"};
-		try{
-			for(int i=0; i < sl.length; i++){
+		String[] sl = {"\\+", "-", "\\*", "%", "\\/", "\\\\"};
+		try {
+			for (int i = 0; i < sl.length; i++) {
 				//String[] lString = str.split(sl[i]);
 				vsStrings = str.split(sl[i]);
 				if( vsStrings.length > 2){

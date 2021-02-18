@@ -6,16 +6,17 @@ import java.math.BigInteger;
 public class NumberHelper {
 	public static final long number2long(Object in) {
 		long r = 0;
+		if (in == null) {
+			return r;
+		}
 		try {
 			if (in instanceof Long) {
 				r = ((Long) in).longValue();
 			} else if (in instanceof Integer) {
 				r = ((Integer) in).longValue();
-			}
-			else if( in instanceof String ){
-				r = (new Integer(((String) in).trim())).longValue();
-			}
-			else if( in instanceof Double ){
+			} else if (in instanceof String) {
+				r = Long.valueOf(((String) in).trim()).longValue();
+			} else if (in instanceof Double) {
 				r = ((Double) in).longValue();
 			}
 			else if( in instanceof Float ){
@@ -39,13 +40,16 @@ public class NumberHelper {
 
 	public static final int number2int(Object in) {
 		int r = 0;
+		if (in == null) {
+			return r;
+		}
 		try {
 			if (in instanceof Long) {
 				r = ((Long) in).intValue();
 			} else if (in instanceof Integer) {
 				r = ((Integer) in).intValue();
 			} else if (in instanceof String) {
-				r = (new Integer(((String) in).trim())).intValue();
+				r = Integer.valueOf(((String) in).trim()).intValue();
 			} else if (in instanceof Double) {
 				r = ((Double) in).intValue();
 			} else if (in instanceof Float) {

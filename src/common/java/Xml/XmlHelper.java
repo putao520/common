@@ -5,8 +5,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONArray;
+import org.json.gsc.JSONObject;
 
 import java.util.Iterator;
 import java.util.Properties;

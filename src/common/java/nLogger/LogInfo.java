@@ -1,7 +1,7 @@
 package common.java.nLogger;
 
 import common.java.Time.TimeHelper;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONObject;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

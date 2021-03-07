@@ -1,7 +1,7 @@
 package common.java.Http;
 
 import common.java.String.StringHelper;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONObject;
 
 public class HttpHelper {
     private final JSONObject data;

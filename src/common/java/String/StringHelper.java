@@ -1,8 +1,7 @@
 package common.java.String;
 
-import com.google.common.base.Joiner;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONArray;
+import org.json.gsc.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -40,8 +39,12 @@ public class StringHelper {
 	 * @param ichar
 	 * @return
 	 */
-	public static String join(List<?> ary,String ichar){
-		return Joiner.on(ichar).skipNulls().join(ary);
+	public static String join(List<?> ary,String ichar) {
+		String r = "";
+		for (Object v : ary) {
+			r += (v + ichar);
+		}
+		return StringHelper.build(r).trimFrom(ichar.charAt(0)).toString();
 	}
 	public static String join(String[] strary){
 		return join(strary,",",0,-1);
@@ -228,9 +231,10 @@ public class StringHelper {
 	 * @param ichar
 	 * @return
 	 */
-	public StringHelper trimFrom(char ichar){
-		leftFix(ichar);
-		rightFix(ichar);
+	public StringHelper trimFrom(char ichar) {
+		int i = (str.charAt(0) == ichar) ? 1 : 0;
+		int l = (str.charAt(str.length() - 1) == ichar) ? str.length() - 1 : str.length();
+		str = str.substring(i, l);
 		return this;
 	}
 
@@ -366,13 +370,15 @@ public class StringHelper {
 		str = (len > idx && idx >= 0) ? String.valueOf( str.charAt( idx ) ) : "";
 		return this;
 	}
-    
-    /**获得第一个字符
-     * @return
-     */
-    public StringHelper charAtFrist(){
-    	return charAt(0);
-    }
+
+	/**
+	 * 获得第一个字符
+	 *
+	 * @return
+	 */
+	public StringHelper charAtFirst() {
+		return charAt(0);
+	}
     
     /**去掉第一个字符
      * @return

@@ -7,7 +7,7 @@ package common.java.EventWorker;
  */
 
 import common.java.String.StringHelper;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONObject;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;

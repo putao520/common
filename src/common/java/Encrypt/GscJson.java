@@ -1,6 +1,6 @@
 package common.java.Encrypt;
 
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONObject;
 
 public class GscJson {
 

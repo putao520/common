@@ -4,8 +4,8 @@ import common.java.nLogger.nLogger;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.apache.axis.encoding.XMLType;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.gsc.JSONArray;
+import org.json.gsc.JSONObject;
 
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;

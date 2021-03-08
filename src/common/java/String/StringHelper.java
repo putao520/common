@@ -44,7 +44,7 @@ public class StringHelper {
 		for (Object v : ary) {
 			r += (v + ichar);
 		}
-		return StringHelper.build(r).trimFrom(ichar.charAt(0)).toString();
+		return StringHelper.trimFrom(r, ichar.charAt(0));
 	}
 	public static String join(String[] strary){
 		return join(strary,",",0,-1);
@@ -236,6 +236,12 @@ public class StringHelper {
 		int l = (str.charAt(str.length() - 1) == ichar) ? str.length() - 1 : str.length();
 		str = str.substring(i, l);
 		return this;
+	}
+
+	public static String trimFrom(String str, char ichar) {
+		int i = (str.charAt(0) == ichar) ? 1 : 0;
+		int l = (str.charAt(str.length() - 1) == ichar) ? str.length() - 1 : str.length();
+		return str.substring(i, l);
 	}
 
 	public StringHelper left(int len) {

@@ -464,7 +464,12 @@ public class StringHelper {
 		return rs;
 	}
 
-	public static final boolean invaild(String str) {
+	public static final String randomString(int max_len) {
+		int l = random.nextInt(max_len) + 1;
+		return createRandomCode(l);
+	}
+
+	public static final boolean isInvalided(String str) {
 		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
 	}
 

@@ -57,25 +57,30 @@ public class ImageHelper {
 	public static String getImageStr(InputStream inputStream) {
 	    byte[] data = null;
 	    try {
-	        data = new byte[inputStream.available()];
-	        inputStream.read(data);
-	        inputStream.close();
-	    } catch (IOException e) {
+			data = new byte[inputStream.available()];
+			inputStream.read(data);
+		} catch (IOException e) {
 			nLogger.logInfo(e);
+		} finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	    // 加密
 		return Base64.encode(data);
 	}
 
-    public static final String thumb(String filePath, int h, int w, String suffix) {
-        String newPath;
-        try {
-			newPath = FileHelper.newRandomTempFile(suffix);
-            Thumbnails.of(filePath).size(w, h).toFile(newPath);
-        } catch (IOException e) {
+	public static String thumb(String filePath, int h, int w, String suffix) {
+		String newPath;
+		try {
+			newPath = FileHelper.buildTempFile(suffix);
+			Thumbnails.of(filePath).size(w, h).toFile(newPath);
+		} catch (IOException e) {
 			nLogger.logInfo(e);
 			newPath = null;
 		}
-        return newPath;
-    }
+		return newPath;
+	}
 }

@@ -8,34 +8,34 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.*;
 
-public class ZipHelper {
+public class ZipFileHelper {
     static final int BUFFER = 8192;
 
     private final File zipFile;
 
-    public ZipHelper(String pathName) {
+    public ZipFileHelper(String pathName) {
         zipFile = new File(pathName);
     }
 
     public List<String> decompress() {
         List<String> resultPath = new ArrayList<>();
         String zipFilePath = this.zipFile.getAbsolutePath();
-        String savepath = zipFilePath.substring(0, zipFilePath.lastIndexOf(".")) + File.separator; //保存解压文件目录
-        new File(savepath).mkdir(); //创建保存目录
-        resultPath.add(savepath);
+        String savePath = zipFilePath.substring(0, zipFilePath.lastIndexOf(".")) + File.separator; //保存解压文件目录
+        new File(savePath).mkdir(); //创建保存目录
+        resultPath.add(savePath);
         try {
             ZipFile zipFile = new ZipFile(zipFilePath);
             Enumeration<?> entries = zipFile.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
                 if (entry.isDirectory()) {
-                    deCompressDirectory(entry, savepath);
-                    System.out.println("解压缩：" + savepath + entry.getName());
+                    deCompressDirectory(entry, savePath);
+                    System.out.println("解压缩：" + savePath + entry.getName());
                 } else {
-                    deCompressFile(zipFile.getInputStream(entry), savepath + entry.getName());
-                    System.out.println("解压缩：" + savepath + entry.getName());
+                    deCompressFile(zipFile.getInputStream(entry), savePath + entry.getName());
+                    System.out.println("解压缩：" + savePath + entry.getName());
                 }
-                resultPath.add(savepath + entry.getName());
+                resultPath.add(savePath + entry.getName());
             }
         } catch (Exception e) {
             nLogger.logInfo(e);

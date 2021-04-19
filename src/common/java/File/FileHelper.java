@@ -48,6 +48,10 @@ public class FileHelper<T extends FileHelper> {
         return (T) this;
     }
 
+    public File file() {
+        return this.file;
+    }
+
     /**
      * 新建文件
      */

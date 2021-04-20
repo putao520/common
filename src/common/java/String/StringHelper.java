@@ -5,10 +5,7 @@ import org.json.gsc.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,22 +21,41 @@ public class StringHelper {
 	private StringHelper(String str){
 		this.str = str;
 	}
-	public final static StringHelper build(String str){
+
+	public final static StringHelper build(String str) {
 		return new StringHelper(str);
 	}
-	/**字符串按,指定的字符拼接
+
+	/**
+	 * 字符串按,指定的字符拼接
+	 *
 	 * @param ary
 	 * @return
 	 */
-	public static String join(List<?> ary){
-		return join(ary,",");
+	public static String join(List<?> ary) {
+		return join(ary, ",");
 	}
-	/**字符串按ichar指定的字符拼接
+
+	public static String join(Set<?> ary, String ichar) {
+		String r = "";
+		for (Object v : ary) {
+			r += (v + ichar);
+		}
+		return StringHelper.trimFrom(r, ichar.charAt(0));
+	}
+
+	public static String join(Set<?> ary) {
+		return join(ary, ",");
+	}
+
+	/**
+	 * 字符串按ichar指定的字符拼接
+	 *
 	 * @param ary
 	 * @param ichar
 	 * @return
 	 */
-	public static String join(List<?> ary,String ichar) {
+	public static String join(List<?> ary, String ichar) {
 		String r = "";
 		for (Object v : ary) {
 			r += (v + ichar);
@@ -536,5 +552,12 @@ public class StringHelper {
 		result = String.format("%0" + num + "d", Integer.parseInt(str) + 1);
 
 		return result;
+	}
+
+	/**
+	 * 字符串数组去重
+	 */
+	public static String[] distinct(String[] arrStr) {
+		return Arrays.stream(arrStr).distinct().toArray(String[]::new);
 	}
 }

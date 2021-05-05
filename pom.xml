@@ -44,14 +44,12 @@
             <artifactId>jmimemagic</artifactId>
             <version>0.1.5</version>
         </dependency>
-        <!--
         <dependency>
             <groupId>GrapeSoft</groupId>
             <artifactId>gfwJson</artifactId>
             <version>${gsc.version}</version>
             <scope>provided</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>GrapeSoft</groupId>
             <artifactId>gfwHttpClient</artifactId>

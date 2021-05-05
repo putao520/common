@@ -22,7 +22,7 @@ public class GscJson {
      * @return
      */
     public final static String encode(JSONObject json) {
-        return encodeString(json.toJSONString());
+        return encodeString(json.toString());
     }
 
     public final static String encodeString(String str) {

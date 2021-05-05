@@ -66,11 +66,11 @@ public class LogInfo {
         return rs;
     }
     public JSONObject toJson(){
-        JSONObject rs = JSONObject.putx("time", TimeHelper.build().nowDatetime())
-                .puts("LEVEL", type.toString())
-                .puts("ThreadID", Thread.currentThread().getId())
-                .puts("message", this.info);
-        if( e != null ){
+        JSONObject rs = JSONObject.build("time", TimeHelper.build().nowDatetime())
+                .put("LEVEL", type.toString())
+                .put("ThreadID", Thread.currentThread().getId())
+                .put("message", this.info);
+        if (e != null) {
             rs.put("stack", stack(e));
         }
         return rs;

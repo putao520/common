@@ -23,23 +23,27 @@ public class LogInfo {
         }
     }
     private String info;
-    private LogInfo(Exception e,InfoType type){
+    private LogInfo(Exception e, InfoType type) {
         this.e = e;
         this.type = type;
-        if( this.e != null ){
+        if (this.e != null) {
             this.info = this.e.getMessage();
         }
     }
-    public static final LogInfo build(){
+
+    public static LogInfo build() {
         return new LogInfo(null, InfoType.LOG);
     }
-    public static final LogInfo build(Exception e){
+
+    public static LogInfo build(Exception e) {
         return new LogInfo(e, InfoType.LOG);
     }
-    public static final LogInfo build(Exception e,InfoType type){
+
+    public static LogInfo build(Exception e, InfoType type) {
         return new LogInfo(e, type);
     }
-    public LogInfo level(InfoType type){
+
+    public LogInfo level(InfoType type) {
         this.type = type;
         return this;
     }

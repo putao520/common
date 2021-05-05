@@ -12,113 +12,124 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class XmlHelper {
-	public final static JSONObject xml2json(String xmlstr){
-		return xml2jsonex(xmlstr,new JSONObject());
+	public static JSONObject xml2json(String xmlstr) {
+		return xml2jsonex(xmlstr, new JSONObject());
 	}
-	/**xml转json
+
+	/**
+	 * xml转json
+	 *
 	 * @param xmldoc
 	 * @return
 	 */
-	public final static JSONObject xml2json(Document xmldoc){
-		return xml2jsonex(xmldoc,new JSONObject());
+	public static JSONObject xml2json(Document xmldoc) {
+		return xml2jsonex(xmldoc, new JSONObject());
 	}
-	public final static JSONObject xml2jsonex(String xmldoc,JSONObject rs){
+
+	public static JSONObject xml2jsonex(String xmldoc, JSONObject rs) {
 		JSONObject json;
 		try {
-			json = xml2jsonex(DocumentHelper.parseText(xmldoc),rs);
+			json = xml2jsonex(DocumentHelper.parseText(xmldoc), rs);
 		} catch (DocumentException e) {
 			json = null;
 		}
 		return json;
 	}
-	/**把xmldoc转换成JSON后添加到rs里
+
+	/**
+	 * 把xmldoc转换成JSON后添加到rs里
+	 *
 	 * @param xmldoc
 	 * @param rs
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public final static JSONObject xml2jsonex(Document xmldoc,JSONObject rs){
+	public static JSONObject xml2jsonex(Document xmldoc, JSONObject rs) {
 		JSONObject robj;
 		Element root = xmldoc.getRootElement();
 		robj = chilrenxml2json(root);
 		rs.putAll(robj);
 		return rs;
 	}
-	public final static Document json2xml(String jsonStr){
-        return json2xml(JSONObject.toJSON(jsonStr));
+
+	public static Document json2xml(String jsonStr) {
+		return json2xml(JSONObject.toJSON(jsonStr));
 	}
-	public final static Document json2xml(JSONObject json){
+
+	public static Document json2xml(JSONObject json) {
 		Element element;
 		Document document = DocumentHelper.createDocument();
-		if( json != null){
-			for( Object _obj : json.keySet() ){
-				element = DocumentHelper.createElement((String)_obj);
-				element.add(DocumentHelper.createCDATA((String)json.get(_obj)));
+		if (json != null) {
+			for (String _obj : json.keySet()) {
+				element = DocumentHelper.createElement(_obj);
+				element.add(DocumentHelper.createCDATA((String) json.get(_obj)));
 				document.add(element);
 			}
 		}
 		return document;
 	}
-	public final static Element appendjson2xml(Element fatherNode,JSONObject json){
+
+	public static Element appendjson2xml(Element fatherNode, JSONObject json) {
 		String key;
 		Object _item;
 		Element contentNode;
-		for( Object _obj : json.keySet()){
+		for (Object _obj : json.keySet()) {
 			key = _obj.toString();
-			contentNode = DocumentHelper.createElement( key );//创建
+			contentNode = DocumentHelper.createElement(key);//创建
 			_item = json.get(key);
-			if( _item instanceof JSONObject ){//内容是JSON
-				contentNode = appendjson2xml(contentNode,(JSONObject)_item);
+			if (_item instanceof JSONObject) {//内容是JSON
+				contentNode = appendjson2xml(contentNode, (JSONObject) _item);
 			}
 			else if(_item instanceof JSONArray){
 				JSONArray ary = (JSONArray)_item;
 				for( Object _json : ary ){
-					contentNode = appendjson2xml(contentNode,(JSONObject)_json);
+					contentNode = appendjson2xml(contentNode, (JSONObject) _json);
 				}
-			}
-			else {
-				contentNode.add( DocumentHelper.createCDATA( json.get(key).toString() ));
+			} else {
+				contentNode.add(DocumentHelper.createCDATA(json.get(key).toString()));
 			}
 			fatherNode.add(contentNode);
 		}
 		return fatherNode;
 	}
+
 	@SuppressWarnings("unchecked")
-	public final static JSONObject chilrenxml2json(Element fatherNode){
+	public static JSONObject chilrenxml2json(Element fatherNode) {
 		String key;
 		Element element;
 		Object tmp;
 		Object array;
 		JSONObject rs = new JSONObject();//生成的结果只有最后一个节点
 		JSONObject tmpRS;
-		for ( Iterator<Element> i = fatherNode.elementIterator(); i.hasNext(); ) {
+		for (Iterator<Element> i = fatherNode.elementIterator(); i.hasNext(); ) {
 			element = i.next();
 			tmpRS = chilrenxml2json(element);
 			//遇到名字相同的，生成jsonarray;
 			key = element.getName();
-			if( tmpRS.containsKey(key) ){
+			if( tmpRS.containsKey(key)) {
 				tmp = tmpRS.get(key);
-				array = ( tmp instanceof JSONArray ) ? ((JSONArray)tmp) : new JSONArray();
-				((JSONArray)array).add(element.getData());
-			}
-			else{
+				array = (tmp instanceof JSONArray) ? ((JSONArray) tmp) : new JSONArray();
+				((JSONArray) array).add(element.getData());
+			} else {
 				array = element.getData();
 			}
 			rs.put(element.getName(), array);
 		}
 		return rs;
 	}
-	public final static Element newElementCDATA(String nodeName,String nodeValue){
+
+	public static Element newElementCDATA(String nodeName, String nodeValue) {
 		Element node = DocumentHelper.createElement(nodeName);
 		node.add(DocumentHelper.createCDATA(nodeValue));
 		return node;
 	}
-	public final static Element newElementLong(String nodeName,Long nodeValue){
+
+	public static Element newElementLong(String nodeName, Long nodeValue) {
 		Element node = DocumentHelper.createElement(nodeName);
-		node.add(DocumentHelper.createText(String.valueOf(nodeValue) ));
+		node.add(DocumentHelper.createText(String.valueOf(nodeValue)));
 		return node;
 	}
-	public final static Document string2xml(String xmlString){
+
+	public static Document string2xml(String xmlString) {
 		try {
 			return DocumentHelper.parseText(xmlString);
 		} catch (DocumentException e) {
@@ -126,22 +137,24 @@ public class XmlHelper {
 			return null;
 		}
 	}
-	public final static String xml2string(Document xmldoc){
+
+	public static String xml2string(Document xmldoc) {
 		return xmldoc.asXML();
 	}
-	public final static Element newElement(String nodeName){
+
+	public static Element newElement(String nodeName) {
 		return DocumentHelper.createElement(nodeName);
 	}
-	
-	public final static Properties json2Properties(JSONObject json){
+
+	public static Properties json2Properties(JSONObject json) {
 		Object obj2;
 		String key;
 		Properties pro = new Properties();
-		for(Object obj : json.keySet()){
-			key = (String)obj;
-			obj2 =  json.get( key );
-			if( obj2 instanceof Long ){
-				obj2 = ((Long)obj2).intValue();
+		for (String obj : json.keySet()) {
+			key = obj;
+			obj2 = json.get(key);
+			if (obj2 instanceof Long) {
+				obj2 = ((Long) obj2).intValue();
 			}
 			pro.put(key, obj2) ;
 		}

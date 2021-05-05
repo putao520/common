@@ -53,7 +53,7 @@ public class EventBus {
                             ((Runnable) msg).run();
                         }
                     }
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             });

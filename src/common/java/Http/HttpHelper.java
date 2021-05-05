@@ -5,13 +5,15 @@ import org.json.gsc.JSONObject;
 
 public class HttpHelper {
     private final JSONObject data;
-    public static final HttpHelper build(JSONObject _data){
+    public static HttpHelper build(JSONObject _data) {
         return new HttpHelper(_data);
     }
-    public static final HttpHelper build(String _dataString){
+
+    public static HttpHelper build(String _dataString) {
         return new HttpHelper(JSONObject.toJSON(_dataString));
     }
-    private HttpHelper(JSONObject _data){
+
+    private HttpHelper(JSONObject _data) {
         this.data = _data;
     }
     public String toPost(){
@@ -24,10 +26,10 @@ public class HttpHelper {
         return String.valueOf(tempChar) ;
     }
     private String out(){
-        String out = "";
+        StringBuilder out = new StringBuilder();
         for(String key : data.keySet()){
-            out = out + "&" + key + "=" + data.getString(key);
+            out.append("&").append(key).append("=").append(data.getString(key));
         }
-        return out;
+        return out.toString();
     }
 }

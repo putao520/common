@@ -29,17 +29,14 @@ public class AxisWebService {
 
 	private QName getType(Object value) {
 		//String fix = "xsi:";
-		QName rQName = null;
+		QName rQName;
 		if (value instanceof Integer) {
 			rQName = XMLType.XSD_INTEGER;
-		}
-		else if( value instanceof Long ){
+		} else if (value instanceof Long) {
 			rQName = XMLType.XSD_LONG;
-		}
-		else if( value instanceof Boolean ){
+		} else if (value instanceof Boolean) {
 			rQName = XMLType.XSD_BOOLEAN;
-		}
-		else if( value instanceof Double ){
+		} else if (value instanceof Double) {
 			rQName = XMLType.XSD_DOUBLE;
 		}
 		else if( value instanceof Float ){
@@ -59,8 +56,8 @@ public class AxisWebService {
 		JSONObject json;
 		for (Object obj : params) {
 			json = (JSONObject) obj;
-			for (Object key : json.keySet()) {
-				call.addParameter((String) key, getType(json.get(key)), ParameterMode.IN);
+			for (String key : json.keySet()) {
+				call.addParameter(key, getType(json.get(key)), ParameterMode.IN);
 			}
 		}
 		// call.setReturnType(XMLType.XSD_STRING);
@@ -72,9 +69,9 @@ public class AxisWebService {
 		Call call = (Call) service.createCall();
 		call.setTargetEndpointAddress(wsdlUrl);
 		call.setOperationName(fName);
-		for (Object key : json.keySet()) {
+		for (String key : json.keySet()) {
 			QName qn = (QName) json.get(key);
-			call.addParameter((String) key, qn, ParameterMode.IN);
+			call.addParameter(key, qn, ParameterMode.IN);
 		}
 		// call.setReturnType(XMLType.XSD_STRING);
 		call.setTimeout(30 * 1000);

@@ -1,8 +1,8 @@
 package common.java.EventWorker;
 
 public class SafeEvent {
-    public Object func;
-    public int safeCode;
+    public final Object func;
+    public final int safeCode;
 
     public SafeEvent(int safeCode, Object func) {
         this.func = func;

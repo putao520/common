@@ -8,29 +8,26 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class IPHelper {
-	public static final List<String> localIPs() throws SocketException{
+	public static List<String> localIPs() throws SocketException {
 		List<String> ips = new ArrayList<>();
-		Enumeration<NetworkInterface> interfs = NetworkInterface.getNetworkInterfaces();  
-	    while (interfs.hasMoreElements())  
-	    {  
-	        NetworkInterface interf = interfs.nextElement();  
-	        Enumeration<InetAddress> addres = interf.getInetAddresses();  
-	        while (addres.hasMoreElements())  
-	        {  
-	            InetAddress in = addres.nextElement();  
-	            if (in instanceof Inet4Address)  
-	            {  
-	            	ips.add(in.getHostAddress());
-	            }  
-	            else if (in instanceof Inet6Address)  
+		Enumeration<NetworkInterface> interfs = NetworkInterface.getNetworkInterfaces();
+		while (interfs.hasMoreElements()) {
+			NetworkInterface interf = interfs.nextElement();
+			Enumeration<InetAddress> addres = interf.getInetAddresses();
+			while (addres.hasMoreElements()) {
+				InetAddress in = addres.nextElement();
+				if (in instanceof Inet4Address)
 	            {
-	            	ips.add(in.getHostAddress());
-	            }  
-	        }  
-	    } 
-	    return ips;
+					ips.add(in.getHostAddress());
+				} else if (in instanceof Inet6Address) {
+					ips.add(in.getHostAddress());
+				}
+			}
+		}
+		return ips;
 	}
-	public static final String localIP() {
+
+	public static String localIP() {
 		List<String> ips = null;
 		try {
 			ips = localIPs();
@@ -41,33 +38,34 @@ public class IPHelper {
 		return ips != null && ips.size() > 0 ? ips.get(0) : "127.0.0.1";
 	}
 
-	public static final boolean isLocalIP(String ip) {
-		if( ip.equals("127.0.0.1") || ip.equals("0.0.0.0") ) {
+	public static boolean isLocalIP(String ip) {
+		if (ip.equals("127.0.0.1") || ip.equals("0.0.0.0")) {
 			return true;
 		}
-			
+
 		List<String> ipList = getIpAddress();
-		if( ipList.size() > 0 ){
-			int i,l = ipList.size();
-			for(i =0; i< l; i++){
-				if( ipList.get(i).equals(ip)  ){
+		if (ipList.size() > 0) {
+			int i, l = ipList.size();
+			for (i = 0; i < l; i++) {
+				if (ipList.get(i).equals(ip)) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 	}
+
 	// From HBase Addressing.Java
-	private static final List<String> getIpAddress() {
+	private static List<String> getIpAddress() {
 		List<String> rList = new ArrayList<>();
 		try {
-			Enumeration<NetworkInterface> interfaces=null;
+			Enumeration<NetworkInterface> interfaces;
 			interfaces = NetworkInterface.getNetworkInterfaces();
-			while (interfaces.hasMoreElements()) {  
-				NetworkInterface ni = interfaces.nextElement(); 
+			while (interfaces.hasMoreElements()) {
+				NetworkInterface ni = interfaces.nextElement();
 				Enumeration<InetAddress> addresss = ni.getInetAddresses();
-				while(addresss.hasMoreElements()){
+				while (addresss.hasMoreElements()) {
 					InetAddress nextElement = addresss.nextElement();
 					String hostAddress = nextElement.getHostAddress();
 					rList.add(hostAddress);
@@ -80,52 +78,50 @@ public class IPHelper {
 		}
 		return rList;
 	}
-	
+
 	/**
-     * 获得内网IP
-     * @return 内网IP
-     */
-	public static final String getLocalhostIp() {
-        try{
-            return InetAddress.getLocalHost().getHostAddress();
-        } catch(Exception e){
-            throw new RuntimeException(e);
-        }
-    }
+	 * 获得内网IP
+	 *
+	 * @return 内网IP
+	 */
+	public static String getLocalhostIp() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    /**
-     * 获得外网IP
-     * @return 外网IP
-     */
-	public static final String getInternetIp() {
-        try{
-            Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces();
-            InetAddress ip = null;
-            Enumeration<InetAddress> addrs;
-            while (networks.hasMoreElements())
-            {
-                addrs = networks.nextElement().getInetAddresses();
-                while (addrs.hasMoreElements())
-                {
-                    ip = addrs.nextElement();
-                    if (ip != null
-                            && ip instanceof Inet4Address
-                            && ip.isSiteLocalAddress()
-                            && !ip.getHostAddress().equals(getLocalhostIp()))
-                    {
-                        return ip.getHostAddress();
-                    }
-                }
-            }
+	/**
+	 * 获得外网IP
+	 *
+	 * @return 外网IP
+	 */
+	public static String getInternetIp() {
+		try {
+			Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces();
+			InetAddress ip;
+			Enumeration<InetAddress> addrs;
+			while (networks.hasMoreElements()) {
+				addrs = networks.nextElement().getInetAddresses();
+				while (addrs.hasMoreElements()) {
+					ip = addrs.nextElement();
+					if (ip instanceof Inet4Address
+							&& ip.isSiteLocalAddress()
+							&& !ip.getHostAddress().equals(getLocalhostIp())) {
+						return ip.getHostAddress();
+					}
+				}
+			}
 
-            // 如果没有外网IP，就返回内网IP
-            return getLocalhostIp();
-        } catch(Exception e){
-            throw new RuntimeException(e);
-        }
-    }
+			// 如果没有外网IP，就返回内网IP
+			return getLocalhostIp();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-	public static final long ipToLong(String ipAddress) {
+	public static long ipToLong(String ipAddress) {
 
 		// ipAddressInArray[0] = 192
 		String[] ipAddressInArray = ipAddress.split("\\.");
@@ -148,7 +144,7 @@ public class IPHelper {
 
 	}
 
-	public static final long ipToLong2(String ipAddress) {
+	public static long ipToLong2(String ipAddress) {
 
 		long result = 0;
 
@@ -171,7 +167,7 @@ public class IPHelper {
 		return result;
 	}
 
-	public static final String longToIp(long i) {
+	public static String longToIp(long i) {
 
 		return ((i >> 24) & 0xFF) +
 				"." + ((i >> 16) & 0xFF) +
@@ -180,7 +176,7 @@ public class IPHelper {
 
 	}
 
-	public static final String longToIp2(long ip) {
+	public static String longToIp2(long ip) {
 		StringBuilder sb = new StringBuilder(15);
 
 		for (int i = 0; i < 4; i++) {

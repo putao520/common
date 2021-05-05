@@ -44,7 +44,4 @@ public class ThreadHelper extends Thread {
 		}
 	}
 
-	public void start() {
-		super.start();
-	}
 }

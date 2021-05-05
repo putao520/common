@@ -200,20 +200,9 @@ public class FileHelper<T extends FileHelper> {
         return this.outStream;
     }
 
-    protected void release() {
-        this.unmapAll();
-        try {
-            if (this.inStream != null) {
-                this.inStream.close();
-                this.inStream = null;
-            }
-            if (this.outStream != null) {
-                this.outStream.flush();
-                this.outStream.close();
-                this.outStream = null;
-            }
-        } catch (Exception e) {
-        }
+    // -----------------------------------------------------------
+    public static String newTempFileName() {
+        return getTempDirectory() + "GrapeFWv3" + UUID.randomUUID();
     }
 
     protected void unmap(MappedByteBuffer fmap) {
@@ -291,29 +280,24 @@ public class FileHelper<T extends FileHelper> {
         return fileMap;
     }
 
-    // -----------------------------------------------------------
-    public final static String newTempFileName() {
-        return getTempDirectory() + "GrapeFWv3" + UUID.randomUUID();
-    }
-
     /**
      * 获得系统临时文件夹
      */
-    public final static String getTempDirectory() {
+    public static String getTempDirectory() {
         return System.getProperty("java.io.tmpdir");
     }
 
     /**
      * 获得当前目录
      */
-    public final static String getCurrentDirectory() {
+    public static String getCurrentDirectory() {
         return System.getProperty("user.dir");
     }
 
     /**
      * 获得当前用户目录
      */
-    public final static String getUserDirectory() {
+    public static String getUserDirectory() {
         return System.getProperty("user.home");
     }
 
@@ -323,7 +307,7 @@ public class FileHelper<T extends FileHelper> {
      * @param path 数据来源
      * @return
      */
-    public final static File buildTempFileAt(String path) {
+    public static File buildTempFileAt(String path) {
         try {
             File newFile = File.createTempFile("grape_tmp", null);
             return FileHelper.getFileEx(path, newFile);
@@ -335,14 +319,14 @@ public class FileHelper<T extends FileHelper> {
     /**
      * 获得随机临时文件
      */
-    public final static String buildTempFile() {
+    public static String buildTempFile() {
         return buildTempFile(null);
     }
 
     /**
      * 获得包含指定标识的随机临时文件
      */
-    public final static String buildTempFile(String suffix) {
+    public static String buildTempFile(String suffix) {
         try {
             File newFile = File.createTempFile("grape_tmp", suffix);
             return newFile.getAbsolutePath();
@@ -357,23 +341,23 @@ public class FileHelper<T extends FileHelper> {
      *                 在指定目录下,根据文件名创建文件,如果文件已存在,在文件名后加 _i
      *                 例子:file.txt 如果存在则是 file_0.txt,如果file_0存在则是file_0_1,依次循环
      */
-    public final static File buildFile(String path, String fileName) {
+    public static File buildFile(String path, String fileName) {
         String[] fN = fileName.split("\\.");
         String name = StringHelper.join(fN, ".", fN.length - 1);
         String eName = fN[fN.length - 1];
-        String suff = "";
+        StringBuilder suff = new StringBuilder();
         int i = 0;
         String tempPath;
         do {
             tempPath = path + "/" + name + suff + "." + eName;
             //----为下一轮准备suff
-            suff = suff + "_" + i;
+            suff.append("_").append(i);
             i++;
         } while (!createFile(tempPath));
         return new File(tempPath);
     }
 
-    public final static boolean createFile(String filePath) {
+    public static boolean createFile(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {// 判断文件是否存在
             return false;
@@ -403,7 +387,7 @@ public class FileHelper<T extends FileHelper> {
      * @param targetPath 目的文件地址
      * @return
      */
-    public final static boolean copyFile(String sourcePath, String targetPath) {
+    public static boolean copyFile(String sourcePath, String targetPath) {
         File rsFile = null;
         if (FileHelper.createFile(targetPath)) {//目标文件新建成功
             File targetFile = new File(targetPath);
@@ -419,7 +403,7 @@ public class FileHelper<T extends FileHelper> {
      * @param newFile 目标文件地址
      * @return
      */
-    public final static File getFileEx(String path, File newFile) {
+    public static File getFileEx(String path, File newFile) {
         // 复制 path 文件内容到 newFile
         File oldFile = new File(path);
         try {
@@ -436,7 +420,7 @@ public class FileHelper<T extends FileHelper> {
      * @param filepath
      * @return
      */
-    public final static String getFileType(String filepath) {
+    public static String getFileType(String filepath) {
         File f = new File(filepath);
         String[] strings;
         if (f.exists()) {
@@ -453,11 +437,11 @@ public class FileHelper<T extends FileHelper> {
      * @param
      * @return
      */
-    public final static byte[] getFile(String path) {
+    public static byte[] getFile(String path) {
         return getFile(new File(path));
     }
 
-    public final static byte[] getFile(File file) {
+    public static byte[] getFile(File file) {
         ByteArrayOutputStream outByte = new ByteArrayOutputStream();
         try (InputStream in = new FileInputStream(file)) {
             //System.out.println("以字节为单位读取文件内容，一次读多个字节：");一次读多个字节
@@ -472,19 +456,18 @@ public class FileHelper<T extends FileHelper> {
         return outByte.toByteArray();
     }
 
-
-    public final static void deleteFile(String filepath) {
+    public static void deleteFile(String filepath) {
         int i;
         String[] paths = filepath.split(",");
         for (i = 0; i < paths.length; i++) {
             try {
                 Files.deleteIfExists(Paths.get(paths[i]));
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
 
-    public final static <T> void deleteFile(List<T> filepath) {
+    public static <T> void deleteFile(List<T> filepath) {
         for (Object obj : filepath) {
             File f = null;
             if (obj instanceof File) {
@@ -501,7 +484,7 @@ public class FileHelper<T extends FileHelper> {
     /**
      * 获得文件扩展名
      */
-    public final static String fileExtension(String filePath) {
+    public static String fileExtension(String filePath) {
         String eName = filePath.substring(0, filePath.lastIndexOf('.') + 1);
         return eName.length() > 0 ? eName : "UNKNOWN";
     }
@@ -509,7 +492,7 @@ public class FileHelper<T extends FileHelper> {
     /**
      * 移动src文件到dest
      */
-    public final static boolean moveFile(String src, String dest, boolean over) {
+    public static boolean moveFile(String src, String dest, boolean over) {
         File srcFile = new File(src);
         if (!srcFile.exists()) {
             //来源文件不存在
@@ -534,7 +517,7 @@ public class FileHelper<T extends FileHelper> {
      * @param dest    目标文件路径
      * @param over    是否覆盖
      */
-    public final static boolean moveFile(byte[] srcData, String dest, boolean over) {
+    public static boolean moveFile(byte[] srcData, String dest, boolean over) {
         File destFile = new File(dest);
         if (destFile.exists()) {
             //目标文件已经存在
@@ -560,5 +543,21 @@ public class FileHelper<T extends FileHelper> {
         }
 
         return true;
+    }
+
+    protected void release() {
+        this.unmapAll();
+        try {
+            if (this.inStream != null) {
+                this.inStream.close();
+                this.inStream = null;
+            }
+            if (this.outStream != null) {
+                this.outStream.flush();
+                this.outStream.close();
+                this.outStream = null;
+            }
+        } catch (Exception ignored) {
+        }
     }
 }

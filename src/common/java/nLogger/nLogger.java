@@ -4,30 +4,32 @@ public class nLogger {
 	private static boolean isDebug = false;
 	public static LoggerOut clientFunc = null;
 
-	public static final void onLogger(LoggerOut event) {
+	public static void onLogger(LoggerOut event) {
 		clientFunc = event;
 	}
 
-	public static final void setDebug(boolean state) {
+	public static void setDebug(boolean state) {
 		isDebug = state;
 	}
 
-	private static final void out(String info, LogInfo.InfoType type) {
+	private static void out(String info, LogInfo.InfoType type) {
 		if (clientFunc != null) {
 			clientFunc.out(info, type);
 		}
 	}
 
-	private static final String getLogInfo(Exception e, LogInfo.InfoType type, String in) {
+	private static String getLogInfo(Exception e, LogInfo.InfoType type, String in) {
 		LogInfo infoObj = e == null ? LogInfo.build() : LogInfo.build(e);
 		return infoObj.level(LogInfo.InfoType.DEBUG)
 				.info(in)
 				.toString();
 	}
-	public static void debugInfo(Exception e){
+
+	public static void debugInfo(Exception e) {
 		debugInfo(e, null);
 	}
-	public static void debugInfo(String in){
+
+	public static void debugInfo(String in) {
 		debugInfo(null, in);
 	}
 	public static void debugInfo(Exception e, String in){

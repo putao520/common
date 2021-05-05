@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class NumberHelper {
-	public static final long number2long(Object in) {
+	public static long number2long(Object in) {
 		long r = 0;
 		if (in == null) {
 			return r;
 		}
 		try {
 			if (in instanceof Long) {
-				r = ((Long) in).longValue();
+				r = (Long) in;
 			} else if (in instanceof Integer) {
 				r = ((Integer) in).longValue();
 			} else if (in instanceof String) {
-				r = Long.valueOf(((String) in).trim()).longValue();
+				r = Long.valueOf(((String) in).trim());
 			} else if (in instanceof Double) {
 				r = ((Double) in).longValue();
 			}
@@ -23,7 +23,7 @@ public class NumberHelper {
 				r = ((Float) in).longValue();
 			}
 			else if (in instanceof Boolean) {
-				r = ((Boolean) in).booleanValue() ? 0 : 1;
+				r = (Boolean) in ? 0 : 1;
 			} else if (in instanceof BigInteger) {
 				r = ((BigInteger) in).longValue();
 			} else if (in instanceof BigDecimal) {
@@ -31,14 +31,13 @@ public class NumberHelper {
 			} else {
 				r = 1;
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			r = 0;
 		}
 		return r;
 	}
 
-	public static final int number2int(Object in) {
+	public static int number2int(Object in) {
 		int r = 0;
 		if (in == null) {
 			return r;
@@ -47,15 +46,15 @@ public class NumberHelper {
 			if (in instanceof Long) {
 				r = ((Long) in).intValue();
 			} else if (in instanceof Integer) {
-				r = ((Integer) in).intValue();
+				r = (Integer) in;
 			} else if (in instanceof String) {
-				r = Integer.valueOf(((String) in).trim()).intValue();
+				r = Integer.valueOf(((String) in).trim());
 			} else if (in instanceof Double) {
 				r = ((Double) in).intValue();
 			} else if (in instanceof Float) {
 				r = ((Float) in).intValue();
 			} else if (in instanceof Boolean) {
-				r = ((Boolean) in).booleanValue() ? 0 : 1;
+				r = (Boolean) in ? 0 : 1;
 			} else if (in instanceof BigInteger) {
 				r = ((BigInteger) in).intValue();
 			} else if (in instanceof BigDecimal) {

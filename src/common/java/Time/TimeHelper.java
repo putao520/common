@@ -15,13 +15,15 @@ import java.util.List;
 
 public class TimeHelper {
     private final ZoneId timeZone;
-    public static final TimeHelper build(ZoneId timeZone){
+    public static TimeHelper build(ZoneId timeZone) {
         return new TimeHelper(timeZone);
     }
-    public static final TimeHelper build(){
-        return new TimeHelper( ZoneId.systemDefault());
+
+    public static TimeHelper build() {
+        return new TimeHelper(ZoneId.systemDefault());
     }
-    private TimeHelper(ZoneId timeZone){
+
+    private TimeHelper(ZoneId timeZone) {
         this.timeZone = timeZone;
     }
 
@@ -151,7 +153,7 @@ public class TimeHelper {
     }
 
     //根据年月 获取月份天数
-    public static final int getMonthDayNum(String dyear, String dmouth) {
+    public static int getMonthDayNum(String dyear, String dmouth) {
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM");
         Calendar rightNow = Calendar.getInstance();
         try {
@@ -164,7 +166,7 @@ public class TimeHelper {
 
 
     //根据开始年月，到结束年月范围，生成KEY ARRAY;
-    public static final List<String> buildMonthArray(long startYear, long startMonth, long endYear, long endMonth) {
+    public static List<String> buildMonthArray(long startYear, long startMonth, long endYear, long endMonth) {
         List<String> monthArray = new ArrayList<>();
         long year_num = endYear - startYear;
         if (year_num >= 0) {

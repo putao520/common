@@ -57,8 +57,8 @@ public class ZipFileHelper {
                     new CRC32());
             out = new ZipOutputStream(cos);
             String basedir = "";
-            for (int i = 0; i < pathName.length; i++) {
-                compress(new File(pathName[i]), out, basedir);
+            for (String s : pathName) {
+                compress(new File(s), out, basedir);
             }
             out.close();
         } catch (Exception e) {
@@ -107,10 +107,9 @@ public class ZipFileHelper {
      * 解压缩一个文件
      */
     private void deCompressFile(InputStream is, String filename) {
-        String filePath = filename;
-        File file = new File(filePath);
-        if (!file.exists() && filePath.lastIndexOf("/") != -1) { //如果是目录先创建
-            new File(filePath.substring(0, filePath.lastIndexOf("/"))).mkdirs(); //目录先创建
+        File file = new File(filename);
+        if (!file.exists() && filename.lastIndexOf("/") != -1) { //如果是目录先创建
+            new File(filename.substring(0, filename.lastIndexOf("/"))).mkdirs(); //目录先创建
         }
         try {
             file.createNewFile(); //创建文件
@@ -136,9 +135,9 @@ public class ZipFileHelper {
         }
 
         File[] files = dir.listFiles();
-        for (int i = 0; i < files.length; i++) {
+        for (File file : files) {
             /* 递归 */
-            compress(files[i], out, basedir + dir.getName() + "/");
+            compress(file, out, basedir + dir.getName() + "/");
         }
     }
 

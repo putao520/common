@@ -37,7 +37,7 @@ public class Concurrent<T> {
 
     private Concurrent(T v) {
         this.readOnlyStore = v;
-        this.writeOnlyStore = new AtomicReference(v);
+        this.writeOnlyStore = new AtomicReference<>(v);
         this.swapStore = null;
         this.swapSigned.set(0);
         this.dirtySigned.set(0);
@@ -45,7 +45,7 @@ public class Concurrent<T> {
     }
 
     public static <V> Concurrent<V> build(V v) {
-        return new Concurrent<V>(v);
+        return new Concurrent<>(v);
     }
 
     public Concurrent<T> setReplaceFunc(SwapFunc<T> func) {
@@ -72,7 +72,7 @@ public class Concurrent<T> {
     }
 
     private boolean tryGetWriter() {
-        return (writeSigned.compareAndExchange(0, 1) == 0);
+        return writeSigned.compareAndExchange(0, 1) == 0;
     }
 
     private void getWriter() {

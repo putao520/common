@@ -1,5 +1,7 @@
 package common.java.Number;
 
+import common.java.String.StringHelper;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -66,5 +68,18 @@ public class NumberHelper {
 			r = 0;
 		}
 		return r;
+	}
+
+	public static boolean isNumeric(Object str) {
+		var v = StringHelper.toString(str);
+		if (v == null) {
+			return false;
+		}
+		for (int i = v.length(); --i >= 0; ) {
+			if (!Character.isDigit(v.charAt(i))) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

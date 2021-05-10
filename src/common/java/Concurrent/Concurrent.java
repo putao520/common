@@ -65,6 +65,10 @@ public class Concurrent<T> {
         return this.readOnlyStore;
     }
 
+    public <V> ConcurrentFinal<V> get(Function<T, V> func) {
+        return ConcurrentFinal.build(func.apply(get()));
+    }
+
     // 替换写入对象
     public Concurrent<T> set(T v) {
         this.writeOnlyStore.set(v);

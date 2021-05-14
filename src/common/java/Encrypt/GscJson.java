@@ -65,7 +65,8 @@ public class GscJson {
     }
 
     public static String getHeader(String str) {
-        return str.split("&")[0];
+        var header = str.split("&")[0];
+        return header.startsWith("gsc-") ? header : null;
     }
 
     public static String getType(String header) {

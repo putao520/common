@@ -169,6 +169,9 @@ public class StringHelper {
 	 * @return
 	 */
 	private static boolean isexp(String str) {
+		if (str.indexOf(":") >= 0) {
+			return false;
+		}
 		boolean rb = false;
 		String[] vsStrings;
 		String[] sl = {"\\+", "-", "\\*", "%", "\\/", "\\\\"};

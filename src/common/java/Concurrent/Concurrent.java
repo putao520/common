@@ -2,6 +2,8 @@ package common.java.Concurrent;
 
 import common.java.Thread.ThreadHelper;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -10,6 +12,8 @@ import java.util.function.Function;
  * 多线程安全无锁对象交换容器类
  */
 public class Concurrent<T> {
+
+    private static final ExecutorService worker = Executors.newSingleThreadExecutor();  // 管理命令线程
     // 只写 数据存储对象
     private final AtomicReference<T> writeOnlyStore;
     /**
@@ -137,5 +141,13 @@ public class Concurrent<T> {
     // 是否有新鲜数据需要推送
     public boolean hasFresh() {
         return dirtySigned.intValue() == 1;
+    }
+
+    public <R> R submit(Function<T, R> fn) {
+        try {
+            return worker.submit(() -> fn.apply(writeOnlyStore.get())).get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

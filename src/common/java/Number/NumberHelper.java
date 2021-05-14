@@ -30,8 +30,6 @@ public class NumberHelper {
 				r = ((BigInteger) in).longValue();
 			} else if (in instanceof BigDecimal) {
 				r = ((BigDecimal) in).longValue();
-			} else {
-				r = 1;
 			}
 		} catch (Exception e) {
 			r = 0;
@@ -61,11 +59,67 @@ public class NumberHelper {
 				r = ((BigInteger) in).intValue();
 			} else if (in instanceof BigDecimal) {
 				r = ((BigDecimal) in).intValue();
-			} else {
-				r = 1;
 			}
 		} catch (Exception e) {
 			r = 0;
+		}
+		return r;
+	}
+
+	public static float number2float(Object in) {
+		float r = 0.f;
+		if (in == null) {
+			return r;
+		}
+		try {
+			if (in instanceof Long) {
+				r = ((Long) in).floatValue();
+			} else if (in instanceof Integer) {
+				r = ((Integer) in).floatValue();
+			} else if (in instanceof String) {
+				r = Float.valueOf(((String) in).trim());
+			} else if (in instanceof Double) {
+				r = ((Double) in).floatValue();
+			} else if (in instanceof Float) {
+				r = (Float) in;
+			} else if (in instanceof Boolean) {
+				r = (Boolean) in ? 0.0f : 1.0f;
+			} else if (in instanceof BigInteger) {
+				r = ((BigInteger) in).floatValue();
+			} else if (in instanceof BigDecimal) {
+				r = ((BigDecimal) in).floatValue();
+			}
+		} catch (Exception e) {
+			r = 0.f;
+		}
+		return r;
+	}
+
+	public static double number2double(Object in) {
+		double r = 0.d;
+		if (in == null) {
+			return r;
+		}
+		try {
+			if (in instanceof Long) {
+				r = ((Long) in).doubleValue();
+			} else if (in instanceof Integer) {
+				r = ((Integer) in).doubleValue();
+			} else if (in instanceof String) {
+				r = Double.valueOf(((String) in).trim());
+			} else if (in instanceof Double) {
+				r = ((Double) in);
+			} else if (in instanceof Float) {
+				r = ((Float) in).doubleValue();
+			} else if (in instanceof Boolean) {
+				r = (Boolean) in ? 0.0d : 1.0d;
+			} else if (in instanceof BigInteger) {
+				r = ((BigInteger) in).doubleValue();
+			} else if (in instanceof BigDecimal) {
+				r = ((BigDecimal) in).doubleValue();
+			}
+		} catch (Exception e) {
+			r = 0.d;
 		}
 		return r;
 	}

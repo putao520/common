@@ -1,5 +1,6 @@
 package common.java.Encrypt;
 
+import org.json.gsc.JSONArray;
 import org.json.gsc.JSONObject;
 
 public class GscJson {
@@ -11,12 +12,10 @@ public class GscJson {
      * @return
      */
     public static String decodeHtmlTag(String html) {
-        // return html.replaceAll("@t", "/").replaceAll("@w", "+").replaceAll("@m", "=").replaceAll("@q", "&");
         return html.replaceAll("@t", "/").replaceAll("@w", "+");
     }
 
     public static String encodeHtmlTag(String html) {
-        // return html.replaceAll("/", "@t").replaceAll("\\+", "@w").replaceAll("=", "@m").replaceAll("&", "@q");
         return html.replaceAll("/", "@t").replaceAll("\\+", "@w");
     }
 
@@ -26,12 +25,17 @@ public class GscJson {
      * @param json
      * @return
      */
-    public static String encode(JSONObject json) {
-        return encodeString(json.toString());
+    public static String encodeJson(JSONObject json) {
+        return "gsc-json&" + encodeString(json.toString());
+    }
+
+    public static String encodeJsonArray(JSONArray json) {
+        return "gsc-jsonArray&" + encodeString(json.toString());
     }
 
     public static String encodeString(String str) {
-        return encodeHtmlTag( Base64.encode(str));
+        // add header info
+        return encodeHtmlTag(Base64.encode(str));
     }
 
     /**
@@ -40,11 +44,31 @@ public class GscJson {
      * @param jsonString
      * @return
      */
-    public static JSONObject decode(String jsonString) {
-        return JSONObject.toJSON(decodeString(jsonString));
+    public static JSONObject decodeJson(String jsonString) {
+        var header = getHeader(jsonString);
+        if (!getType(header).equals("json")) {
+            return null;
+        }
+        return JSONObject.toJSON(decodeString(jsonString.substring(header.length() + 1)));
+    }
+
+    public static JSONArray decodeJsonArray(String jsonArrayString) {
+        var header = getHeader(jsonArrayString);
+        if (!getType(header).equals("jsonArray")) {
+            return null;
+        }
+        return JSONArray.toJSONArray(decodeString(jsonArrayString.substring(header.length() + 1)));
     }
 
     public static String decodeString(String str) {
-        return Base64.decode( decodeHtmlTag(str));
+        return Base64.decode(decodeHtmlTag(str));
+    }
+
+    public static String getHeader(String str) {
+        return str.split("&")[0];
+    }
+
+    public static String getType(String header) {
+        return header.split("-")[1];
     }
 }

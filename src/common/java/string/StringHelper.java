@@ -174,6 +174,7 @@ public class StringHelper {
 
 		return rb;
 	}
+
 	/**删除字符串第1个字符
 	 * @param
 	 * @return
@@ -216,34 +217,10 @@ public class StringHelper {
 		if( str.length() > 0 ){
 			str = str.substring(1);
 		}
-		if( str.length() > 0 ){
-			str = str.substring(0,str.length()-1);
+		if (str.length() > 0) {
+			str = str.substring(0, str.length() - 1);
 		}
 		return this;
-	}
-	/**修复字符串
-	 *
-	 * 删除第一个或者最后一个与ichar相同 的 字符
-	 *
-	 * @param ichar
-	 * @return
-	 */
-	public StringHelper trimFrom(char ichar) {
-		leftFix(ichar);
-		rightFix(ichar);
-		return this;
-	}
-
-	public static final String fix(String str, int len) {
-		return fix(str, len, "0");
-	}
-//CharMatcher.anyOf("jadk").trimFrom(sequence);trimLeading;trimTrailingFrom
-
-	/**
-	 * 向前补特定字符串方式对其字符串
-	 */
-	public static final String fix(String str, int len, String replace_char) {
-		return String.format(len + "d", str).replace(" ", replace_char);
 	}
 
 	/**
@@ -281,18 +258,7 @@ public class StringHelper {
 	public final static List<String> path2list(String gsc_post) {
 		return Arrays.asList(gsc_post.substring(9).split(":,"));
 	}
-
-	private static String digits(long val, int digits) {
-		long hi = 1L << (digits * 4);
-		return digitsMap.toString(hi | (val & (hi - 1)), digitsMap.MAX_RADIX)
-				.substring(1);
-	}
-
-	public StringHelper right(int len) {
-		int l = str.length();
-		str = (str.length() > len) ? str.substring(l - len, l) : str;
-		return this;
-	}
+//CharMatcher.anyOf("jadk").trimFrom(sequence);trimLeading;trimTrailingFrom
 
 	/**
 	 * 以62进制（字母加数字）生成19位UUID，最短的UUID
@@ -354,11 +320,32 @@ public class StringHelper {
 		return numCode(len);
 	}
 
-	public static final boolean invaild(String str) {
+	/**
+	 * @param text 模板文本
+	 * @param data K-V对应替换的数据组
+	 * @return
+	 */
+	public static final String createCodeText(String text, JSONObject data) {
+		String rs = text;
+		for (Object obj : data.keySet()) {
+			rs = rs.replaceAll("@" + obj.toString(), data.get(obj).toString());
+		}
+		return rs;
+	}
+
+	public static final String fixString(String str, int len) {
+		return fixString(str, len, "0");
+	}
+
+	public static final String fixString(String str, int len, String replace_char) {
+		return String.format(len + "d", str).replace(" ", replace_char);
+	}
+
+	public static final boolean invaildString(String str) {
 		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
 	}
 
-	public static final String toString(Object obj) {
+	public static final String any2String(Object obj) {
 		String out;
 		try {
 			out = obj.toString();
@@ -372,14 +359,33 @@ public class StringHelper {
 		return out;
 	}
 
-	public StringHelper charAt(int idx) {
-		int len = str.length();
-		str = (len > idx && idx >= 0) ? String.valueOf(str.charAt(idx)) : "";
+	/**
+	 * 修复字符串
+	 * <p>
+	 * 删除第一个或者最后一个与ichar相同 的 字符
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimFrom(char ichar) {
+		leftFix(ichar);
+		rightFix(ichar);
 		return this;
 	}
 
 	public StringHelper left(int len) {
 		str = (str.length() > len) ? str.substring(0, len) : str;
+		return this;
+	}
+
+	/**
+	 * 从左  开始 修复字符串
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimLeadingFrom(char ichar) {
+		leftFix(ichar);
 		return this;
 	}
 
@@ -393,6 +399,17 @@ public class StringHelper {
 		str = str.substring(i);
 	}
 
+	/**
+	 * 从右  开始 修复字符串
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimTrailingFrom(char ichar) {
+		rightFix(ichar);
+		return this;
+	}
+
 	private void rightFix(char ichar) {
 		int l = str.length();
 		if (l > 0) {
@@ -404,6 +421,18 @@ public class StringHelper {
 			}
 			str = str.substring(0, l);
 		}
+	}
+
+	public StringHelper right(int len) {
+		int l = str.length();
+		str = (str.length() > len) ? str.substring(l - len, l) : str;
+		return this;
+	}
+
+	private static String digits(long val, int digits) {
+		long hi = 1L << (digits * 4);
+		return digitsMap.toString(hi | (val & (hi - 1)), digitsMap.MAX_RADIX)
+				.substring(1);
 	}
 
 	/**
@@ -438,6 +467,14 @@ public class StringHelper {
 		return formline;
 	}
 
+	public String[] toArray(char ichar) {
+		return toArray(String.valueOf(ichar));
+	}
+
+	public String[] toArray(String ichar) {
+		return str.split(ichar);
+	}
+
 	@Override
 	public String toString() {
 		return str;
@@ -466,17 +503,10 @@ public class StringHelper {
 		return this;
 	}
 
-	/**
-	 * @param text 模板文本
-	 * @param data K-V对应替换的数据组
-	 * @return
-	 */
-	public static final String createCodeText(String text, JSONObject data) {
-		String rs = text;
-		for (Object obj : data.keySet()) {
-			rs = rs.replaceAll("@" + obj.toString(), data.get(obj).toString());
-		}
-		return rs;
+	public StringHelper charAt(int idx) {
+		int len = str.length();
+		str = (len > idx && idx >= 0) ? String.valueOf(str.charAt(idx)) : "";
+		return this;
 	}
 
 	/**
@@ -495,28 +525,6 @@ public class StringHelper {
 	 */
 	public StringHelper trimLeading() {
 		str = str.length() > 0 ? str.substring(1) : "";
-		return this;
-	}
-
-	/**
-	 * 从左  开始 替换ichar对应字符
-	 *
-	 * @param ichar
-	 * @return
-	 */
-	public StringHelper trimLeadingFrom(char ichar) {
-		leftFix(ichar);
-		return this;
-	}
-
-	/**
-	 * 从右  开始 替换ichar对应字符
-	 *
-	 * @param ichar
-	 * @return
-	 */
-	public StringHelper trimTrailingFrom(char ichar) {
-		rightFix(ichar);
 		return this;
 	}
 

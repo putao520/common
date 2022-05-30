@@ -99,38 +99,65 @@ public class StringHelper {
 		String r2;
 		if( obj != null ){
 			r2 = obj.toString();
-			if(obj instanceof String){
+			if (obj instanceof String) {
 				rString = (isexp(r2) ? r2 : "\"" + obj + "\"");
-			} else if( obj instanceof JSONObject ){
+			} else if (obj instanceof JSONObject) {
 				rString = "'" + r2 + "'";
-            } else if (obj instanceof JSONArray) {
+			} else if (obj instanceof JSONArray) {
 				rString = "\"" + r2 + "\"";
-			} else{
+			} else {
 				rString = r2;
 			}
-		}
-		else{
+		} else {
 			rString = "null";
 		}
 		return rString;
 	}
-	/**是否是sql表达式字符串
+
+	/**
+	 * 根据传入变量类型生成对应的字符串表达式
+	 *
+	 * @param obj
+	 * @return
+	 */
+	public static String typeString(Object obj, String replace_char) {
+		String rString;
+		String r2;
+		if (obj != null) {
+			r2 = obj.toString();
+			if (obj instanceof String) {
+				rString = (isexp(r2) ? r2 : replace_char + obj + replace_char);
+			} else if (obj instanceof JSONObject) {
+				rString = replace_char + r2 + replace_char;
+			} else if (obj instanceof JSONArray) {
+				rString = replace_char + r2 + replace_char;
+			} else {
+				rString = r2;
+			}
+		} else {
+			rString = "null";
+		}
+		return rString;
+	}
+
+	/**
+	 * 是否是sql表达式字符串
+	 *
 	 * @param str
 	 * @return
 	 */
-	private static boolean isexp(String str){
+	private static boolean isexp(String str) {
 		boolean rb = false;
-		/*
 		String[] vsStrings;
-		String[] sl = {"\\+","-","\\*","%","\\/","\\\\"};
-		try{
-			for(int i=0; i < sl.length; i++){
+		String[] sl = {"\\+", "-", "\\*", "%", "\\/", "\\\\"};
+		try {
+			for (int i = 0; i < sl.length; i++) {
 				//String[] lString = str.split(sl[i]);
 				vsStrings = str.split(sl[i]);
-				if( vsStrings.length > 2){
+				if (vsStrings.length > 2) {
 					rb = true;
-					for(int n = 0; n < vsStrings.length; n++){
-						if( vsStrings[n].equals("") ){
+					for (int n = 0; n < vsStrings.length; n++) {
+						if (vsStrings[n].equals("")) {
 							rb = false;
 							break;
 						}
@@ -144,7 +171,7 @@ public class StringHelper {
 		catch(Exception e){
 			rb = false;
 		}
-		*/
+
 		return rb;
 	}
 	/**删除字符串第1个字符
@@ -201,228 +228,247 @@ public class StringHelper {
 	 * @param ichar
 	 * @return
 	 */
-	public StringHelper trimFrom(char ichar){
+	public StringHelper trimFrom(char ichar) {
 		leftFix(ichar);
 		rightFix(ichar);
 		return this;
 	}
 
-	public StringHelper left(int len){
-		str = ( str.length() > len ) ? str.substring(0, len) : str;
-		return this;
+	public static final String fix(String str, int len) {
+		return fix(str, len, "0");
 	}
 //CharMatcher.anyOf("jadk").trimFrom(sequence);trimLeading;trimTrailingFrom
-	/**从左  开始 修复字符串
-	 * @param ichar
+
+	/**
+	 * 向前补特定字符串方式对其字符串
+	 */
+	public static final String fix(String str, int len, String replace_char) {
+		return String.format(len + "d", str).replace(" ", replace_char);
+	}
+
+	/**
+	 * uri参数转换成json字符串
+	 *
+	 * @param uri_data
 	 * @return
 	 */
-	public StringHelper trimLeadingFrom(char ichar) {
-		leftFix(ichar);
+	@SuppressWarnings("unchecked")
+	public final static JSONObject path2rpc(String uri_data) {
+		JSONObject rs = null;
+		String[] _iteml = uri_data.split("\\&");
+		String[] _keyValue;
+		JSONObject obj;
+		if (_iteml.length > 0) {
+			obj = new JSONObject();
+			for (int i = 0; i < _iteml.length; i++) {
+				_keyValue = _iteml[i].split("=");
+				if (_keyValue.length == 2) {
+					obj.put(_keyValue[0], _keyValue[1]);
+				}
+			}
+			rs = obj;
+		}
+		return rs != null && !rs.isEmpty() ? rs : null;
+	}
+
+	/**
+	 * uri参数转换成List，保留顺序，抛弃KEY
+	 *
+	 * @param gsc_post gsc_post格式post call
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public final static List<String> path2list(String gsc_post) {
+		return Arrays.asList(gsc_post.substring(9).split(":,"));
+	}
+
+	private static String digits(long val, int digits) {
+		long hi = 1L << (digits * 4);
+		return digitsMap.toString(hi | (val & (hi - 1)), digitsMap.MAX_RADIX)
+				.substring(1);
+	}
+
+	public StringHelper right(int len) {
+		int l = str.length();
+		str = (str.length() > len) ? str.substring(l - len, l) : str;
 		return this;
 	}
-	private void leftFix(char ichar){
+
+	/**
+	 * 以62进制（字母加数字）生成19位UUID，最短的UUID
+	 *
+	 * @return
+	 */
+	public static final String shortUUID() {
+		UUID uuid = UUID.randomUUID();
+		StringBuilder sb = new StringBuilder();
+		sb.append(digits(uuid.getMostSignificantBits() >> 32, 8));
+		sb.append(digits(uuid.getMostSignificantBits() >> 16, 4));
+		sb.append(digits(uuid.getMostSignificantBits(), 4));
+		sb.append(digits(uuid.getLeastSignificantBits() >> 48, 4));
+		sb.append(digits(uuid.getLeastSignificantBits(), 12));
+		return sb.toString();
+	}
+
+	/**
+	 * 输出数字唯一ID，20字节
+	 *
+	 * @return
+	 */
+	public static final String numUUID() {
+		return StringHelper.numCode(20);
+	}
+
+	/**
+	 * 指定长度的数字随机字符串
+	 *
+	 * @param len
+	 * @return
+	 */
+	public static final String numCode(int len) {
+		String chars = "0123456789";
+		int maxPos = chars.length();
+		String pwd = "";
+		for (int i = 0; i < len; i++) {
+			pwd += chars.charAt(new Double(Math.ceil(Math.floor(Math.random() * maxPos))).intValue());
+		}
+		return pwd;
+	}
+
+	/**
+	 * 输出常用验证码，6位
+	 *
+	 * @return
+	 */
+	public static final String checkCode() {
+		return numCode(6);
+	}
+
+	/**
+	 * 输出指定长度验证码
+	 *
+	 * @param len
+	 * @return
+	 */
+	public static final String checkCode(int len) {
+		return numCode(len);
+	}
+
+	public static final boolean invaild(String str) {
+		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
+	}
+
+	public static final String toString(Object obj) {
+		String out;
+		try {
+			out = obj.toString();
+		} catch (Exception e) {
+			try {
+				out = String.valueOf(obj);
+			} catch (Exception e1) {
+				out = null;
+			}
+		}
+		return out;
+	}
+
+	public StringHelper charAt(int idx) {
+		int len = str.length();
+		str = (len > idx && idx >= 0) ? String.valueOf(str.charAt(idx)) : "";
+		return this;
+	}
+
+	public StringHelper left(int len) {
+		str = (str.length() > len) ? str.substring(0, len) : str;
+		return this;
+	}
+
+	private void leftFix(char ichar) {
 		int i = 0, l = str.length();
-		for( ; i < l; i++ ){
-			if( str.charAt(i) != ichar ){
+		for (; i < l; i++) {
+			if (str.charAt(i) != ichar) {
 				break;
 			}
 		}
 		str = str.substring(i);
 	}
-	/**从右  开始 修复字符串
-	 * @param ichar
-	 * @return
-	 */
-	public StringHelper trimTrailingFrom(char ichar) {
-		rightFix(ichar);
-		return this;
-	}
-	private void rightFix(char ichar){
+
+	private void rightFix(char ichar) {
 		int l = str.length();
-		if( l > 0 ){
+		if (l > 0) {
 			int i = 0;
-			for(; i < l; l-- ){
-				if( str.charAt(l - 1) != ichar ){
+			for (; i < l; l--) {
+				if (str.charAt(l - 1) != ichar) {
 					break;
 				}
 			}
-			str = str.substring(0 , l);
+			str = str.substring(0, l);
 		}
 	}
 
-	public StringHelper right(int len){
-		int l = str.length();
-		str = ( str.length() > len ) ? str.substring(l-len, l) : str;
-		return this;
-	}
-
-	/**删除空白
+	/**
+	 * 删除空白
+	 *
 	 * @return
 	 */
 	public StringHelper replaceBlank() {
-        String dest = "";
-        if (str!=null) {
-            Matcher m = pattern.matcher(str);
-            dest = m.replaceAll("");
-        }
-        str = dest;
-        return this;
-    }
+		String dest = "";
+		if (str != null) {
+			Matcher m = pattern.matcher(str);
+			dest = m.replaceAll("");
+		}
+		str = dest;
+		return this;
+	}
 
-    /**uri参数转换成json字符串
-     * @param uri_data
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-	public final static JSONObject path2rpc(String uri_data){
-    	JSONObject rs = null;
-    	String[] _iteml = uri_data.split("\\&");
-    	String[] _keyValue;
-    	JSONObject obj;
-    	if( _iteml.length > 0 ){
-    		obj = new JSONObject();
-    		for(int i=0; i<_iteml.length; i++){
-    			_keyValue = _iteml[i].split("=");
-    			if( _keyValue.length == 2 ){
-    				obj.put(_keyValue[0], _keyValue[1]);
-    			}
-    		}
-    		rs = obj;
-    	}
-    	return rs != null && !rs.isEmpty() ? rs : null;
-    }
-    /**uri参数转换成List，保留顺序，抛弃KEY
-     * @param gsc_post gsc_post格式post call
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-	public final static List<String> path2list(String gsc_post){
-    	return Arrays.asList(gsc_post.substring(9).split(":,"));
-    }
-    /**任何情况下按行切分字符串
-     * @return
-     */
-    public String[] toArrayByLine(){
-    	String data = str;
-    	String[] formline = data.split("\n");
-		if( formline.length < 2){
+	/**
+	 * 任何情况下按行切分字符串
+	 *
+	 * @return
+	 */
+	public String[] toArrayByLine() {
+		String data = str;
+		String[] formline = data.split("\n");
+		if (formline.length < 2) {
 			formline = data.split("\r");
 		}
-		for(int i=0; i< formline.length; i++){
+		for (int i = 0; i < formline.length; i++) {
 			formline[i] = trimFrom('\r').trimFrom('\n').toString();
 		}
 		return formline;
-    }
-	public String[] toArray(char ichar){
-		return toArray(String.valueOf(ichar));
 	}
-	public String[] toArray(String ichar){
-		return str.split(ichar);
+
+	@Override
+	public String toString() {
+		return str;
 	}
-    @Override
-    public String toString(){
-    	return str;
-	}
-    
-    /**首字母大写
-     * @return
-     */
-    public StringHelper upperCaseFirst(){
-    	char chr = str.length() > 0 ? str.charAt(0) : '\0';
-    	StringBuilder strBuilder = new StringBuilder(str);
-    	strBuilder.setCharAt(0, String.valueOf(chr).toUpperCase().charAt(0));
-    	str = strBuilder.toString();
-    	return this;
-    }
-    
-    /**获得最后一个字符
-     * @return
-     */
-    public StringHelper charAtLast(){
-    	 charAt( str.length() - 1 );
-    	return this;
-    }
-	public StringHelper charAt(int idx){
-		int len = str.length();
-		str = (len > idx && idx >= 0) ? String.valueOf( str.charAt( idx ) ) : "";
-		return this;
-	}
-    
-    /**获得第一个字符
-     * @return
-     */
-    public StringHelper charAtFrist(){
-    	return charAt(0);
-    }
-    
-    /**去掉第一个字符
-     * @return
-     */
-    public StringHelper trimLeading(){
-		str = str.length() > 0 ? str.substring(1) : "";
-		return this;
-    }
-    private static String digits(long val, int digits) {  
-        long hi = 1L << (digits * 4);  
-        return digitsMap.toString(hi | (val & (hi - 1)), digitsMap.MAX_RADIX)
-                .substring(1);  
-    }  
-      
-    /** 
-     * 以62进制（字母加数字）生成19位UUID，最短的UUID 
-     *  
-     * @return 
-     */  
-    public static final String shortUUID(){
-    	UUID uuid = UUID.randomUUID();  
-        StringBuilder sb = new StringBuilder();  
-        sb.append(digits(uuid.getMostSignificantBits() >> 32, 8));  
-        sb.append(digits(uuid.getMostSignificantBits() >> 16, 4));  
-        sb.append(digits(uuid.getMostSignificantBits(), 4));  
-        sb.append(digits(uuid.getLeastSignificantBits() >> 48, 4));  
-        sb.append(digits(uuid.getLeastSignificantBits(), 12));  
-        return sb.toString();  
-    }
-    
-    /**输出数字唯一ID，20字节
-     * @return
-     */
-    public static final String numUUID(){
-    	return StringHelper.numCode(20);
-    }
-    
-    /**指定长度的数字随机字符串
-     * @param len
-     * @return
-     */
-    public static final String numCode(int len){
-    	String chars = "0123456789";
-    	int maxPos = chars.length();
-    	String pwd = "";
-    	for (int i = 0; i < len; i++) {
-    		pwd += chars.charAt( new Double( Math.ceil(Math.floor(Math.random() * maxPos)) ).intValue() );
-    	}
-    	return pwd;
-    }
-    
-    /**输出常用验证码，6位
-     * @return
-     */
-    public static final String checkCode(){
-    	return numCode(6);
-    }
-    
-    /**输出指定长度验证码
-     * @param len
-     * @return
-     */
-    public static final String checkCode(int len){
-    	return numCode(len);
-    }
-    
+
 	/**
-	 * @param text	模板文本
-	 * @param data	K-V对应替换的数据组
+	 * 首字母大写
+	 *
+	 * @return
+	 */
+	public StringHelper upperCaseFirst() {
+		char chr = str.length() > 0 ? str.charAt(0) : '\0';
+		StringBuilder strBuilder = new StringBuilder(str);
+		strBuilder.setCharAt(0, String.valueOf(chr).toUpperCase().charAt(0));
+		str = strBuilder.toString();
+		return this;
+	}
+
+	/**
+	 * 获得最后一个字符
+	 *
+	 * @return
+	 */
+	public StringHelper charAtLast() {
+		charAt(str.length() - 1);
+		return this;
+	}
+
+	/**
+	 * @param text 模板文本
+	 * @param data K-V对应替换的数据组
 	 * @return
 	 */
 	public static final String createCodeText(String text, JSONObject data) {
@@ -433,32 +479,47 @@ public class StringHelper {
 		return rs;
 	}
 
-	public static final String fixString(String str, int len) {
-		return fixString(str, len, "0");
+	/**
+	 * 获得第一个字符
+	 *
+	 * @return
+	 */
+	public StringHelper charAtFrist() {
+		return charAt(0);
 	}
 
-	public static final String fixString(String str, int len, String replace_char) {
-		return String.format(len + "d", str).replace(" ", replace_char);
+	/**
+	 * 去掉第一个字符
+	 *
+	 * @return
+	 */
+	public StringHelper trimLeading() {
+		str = str.length() > 0 ? str.substring(1) : "";
+		return this;
 	}
 
-	public static final boolean invaildString(String str) {
-		return str == null || str.trim().length() == 0 || str.trim().equals("null") || str.trim().equals("undefined");
+	/**
+	 * 从左  开始 替换ichar对应字符
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimLeadingFrom(char ichar) {
+		leftFix(ichar);
+		return this;
 	}
 
-	public static final String any2String(Object obj) {
-		String out;
-		try {
-			out = obj.toString();
-		} catch (Exception e) {
-			try{
-				out = String.valueOf(obj);
-			}
-			catch (Exception e1){
-				out = null;
-			}
-		}
-		return out;
+	/**
+	 * 从右  开始 替换ichar对应字符
+	 *
+	 * @param ichar
+	 * @return
+	 */
+	public StringHelper trimTrailingFrom(char ichar) {
+		rightFix(ichar);
+		return this;
 	}
+
 	public StringHelper toUTF8(String charSetName) {
 		String rString = null;
 		try {

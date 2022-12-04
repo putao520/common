@@ -552,7 +552,7 @@ public class StringHelper {
 		// 0 代表前面补充0
 		// num 代表长度为4
 		// d 代表参数为正数型
-		result = String.format("%0" + num + "d", Integer.parseInt(str) + 1);
+		result = String.format("%0" + num + "d", Integer.parseInt(str));
 
 		return result;
 	}

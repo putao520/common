@@ -17,14 +17,14 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Central Repository" />
-      <option name="url" value="http://putao520.team:8082/repository/maven-public/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="rdc-snapshots" />
       <option name="name" value="rdc-snapshots" />
       <option name="url" value="https://packages.aliyun.com/maven/repository/2008022-snapshot-oYlpxF/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://putao520.team:8082/repository/maven-public/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
